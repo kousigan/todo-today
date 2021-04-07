@@ -1,0 +1,27 @@
+.card-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  padding: 0 5px;
+}
+
+.card {
+  max-width: unset;
+  margin: 0;
+}
+
+.section img {
+  border-radius: 50%;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+
+.card-list .section {
+  text-align: center;
+}
+
+.filterNames input {
+  width: 100%;
+  margin: 0 0 10px 0;
+}

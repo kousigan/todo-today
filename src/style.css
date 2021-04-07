@@ -1,3 +1,90 @@
-h1, p {
-  font-family: Lato;
+html,
+body {
+  height: 100%;
+}
+#root,
+body .container {
+  padding: 0;
+}
+body .container .row [class*="panel"] {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.calendar-panel {
+  background-color: #f2f2f2;
+  height: 100vh;
+}
+.monthly-calendar {
+  width: 300px;
+  max-width: 300px;
+  background-color: #f2f2f2;
+  height: 100vh;
+  overflow: auto;
+}
+textarea {
+  width: 100%;
+  margin: 10px 0;
+  resize: none;
+}
+
+h1 button.small {
+  float: right;
+  margin: 0;
+}
+
+.mytasks.card-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  padding: 10px 5px 0;
+}
+
+.mytasks .card {
+  max-width: unset;
+  margin: 0;
+}
+.mytasks .card .section{
+  display: flex;
+align-items: center;
+grid-gap:10px;
+}
+.mytasks .card .section label{
+  float: left;
+width:8px;
+height: 4px;
+margin-bottom: 10px;
+border-bottom:4px solid #efefef;
+border-left:4px solid #efefef;
+transform: rotateZ(-45deg);
+}
+.mytasks .card[data-status=true],
+.mytasks .card[data-status=true] .section label{
+border-color: rgb(185, 229, 185);
+}
+.getModal{
+  display: flex;
+flex: 0 1 auto;
+z-index: 1200;
+position: absolute;
+width: 100%;
+left: 0;
+top: 0;
+bottom: 0;
+justify-content: center;
+background: rgba(0, 0, 0, 0.85);
+}
+.card.getusername{
+  width:320px;
+}
+
+figure{
+  width:300px;
+  text-align: center;
+  margin: 0 auto;
+
+}
+figcaption{
+  color: #888;
+  padding: 20px 0 0 ;
+  font-size:16px;
 }
