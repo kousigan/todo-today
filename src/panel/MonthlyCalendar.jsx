@@ -54,7 +54,7 @@ class MonthlyCalendar extends Component {
     }));
   };
   componentDidUpdate() {
-    console.log("after mounting");
+    // console.log("after mounting");
   }
   renderDays = () => {};
   componentDidMount() {
@@ -65,7 +65,7 @@ class MonthlyCalendar extends Component {
         length: temp.ln
       }
     }));
-    console.log("component did mount");
+    // console.log("component did mount");
   }
 
   setDay = e => {

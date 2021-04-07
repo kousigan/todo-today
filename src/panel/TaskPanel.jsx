@@ -29,7 +29,7 @@ class TasksPanel extends Component {
   componentDidMount() {
     this.setState(nextProps => {
       this.state.todo.date = nextProps;
-      console.log("componentDidMount", this.props.today);
+      // console.log("componentDidMount", this.props.today);
       // this.makeUpdate(this.props.today);
     });
   }
@@ -40,7 +40,7 @@ class TasksPanel extends Component {
 
   setFocus = e => {
     var tempKey = e.target.getAttribute("data-key");
-    db.collection("todo-"+this.props.user)
+    db.collection("todo-" + this.props.user)
       .doc(tempKey)
       .get()
       .then(doc => {
@@ -80,7 +80,6 @@ class TasksPanel extends Component {
             />
           </div>
         </div>
-         
       </div>
     );
   }

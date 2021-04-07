@@ -50,9 +50,9 @@ class App extends React.Component {
       {
         prevState.fdate = temp;
       }
-      console.log(this.state.user);
+      // console.log(this.state.user);
       if (this.state.user !== null) {
-        console.log(this.state.user);
+        // console.log(this.state.user);
         this.getData(this.state.user);
       }
       return this.state.fdate;
@@ -87,7 +87,7 @@ class App extends React.Component {
     return this.state.theList;
   };
   checkUser = e => {
-    if(e.target.value.length>0){
+    if (e.target.value.length > 0) {
       this.setState({ showerror: false });
     }
     if (e.key == "Enter") {
@@ -110,7 +110,7 @@ class App extends React.Component {
       <div className="overlay-container getModal">
         <div className="card getusername">
           <h3 className="section">Who's this?</h3>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Enter a name</label>
           <input
             type="text"
             id="Username"
@@ -167,11 +167,11 @@ class App extends React.Component {
       todo.date.day = parseInt(this.state.fdate.day);
       todo.date.month = parseInt(this.state.fdate.month);
       todo.date.year = parseInt(this.state.fdate.year);
-      console.log(todo);
+      // console.log(todo);
       db.collection("todo-" + this.state.user)
         .add(todo)
         .then(() => {
-          console.log("success");
+          // console.log("success");
           document.getElementById("myTextarea").value = "";
         });
     }
@@ -180,7 +180,7 @@ class App extends React.Component {
     const newDay_ = this.state.fdate;
 
     const user = this.state.user;
-    console.log("render: ", this.state.theList);
+    // console.log("render: ", this.state.theList);
 
     return (
       <div className="container">
@@ -214,7 +214,7 @@ class TaskCard extends React.Component {
   pushUpdate = e => {
     var docId = e.target.getAttribute("data-key");
     var userId = e.target.getAttribute("data-user");
-    console.log(docId, userId);
+    // console.log(docId, userId);
     var taskRef = db.collection("todo-" + userId).doc(docId);
     taskRef.get().then(snapshot => {
       if (!snapshot.data().status) {
@@ -225,7 +225,7 @@ class TaskCard extends React.Component {
     });
   };
   render() {
-    console.log(this.props.user);
+    // console.log(this.props.user);
     return (
       <div
         className="card"
