@@ -41,50 +41,54 @@ h1 button.small {
 
 .mytasks .card {
   max-width: unset;
+  height: 100%;
   margin: 0;
 }
-.mytasks .card .section{
+.mytasks .card .section {
   display: flex;
-align-items: center;
-grid-gap:10px;
+  background: none;
+  grid-gap: 10px;
+  height: 100%;
 }
-.mytasks .card .section label{
+.mytasks .card .section label {
   float: left;
-width:8px;
-height: 4px;
-margin-bottom: 10px;
-border-bottom:4px solid #efefef;
-border-left:4px solid #efefef;
-transform: rotateZ(-45deg);
+  width: 8px;
+  height: 4px;
+  margin-bottom: 10px;
+  border-bottom: 4px solid #efefef;
+  border-left: 4px solid #efefef;
+  transform: rotateZ(-45deg);
 }
-.mytasks .card[data-status=true],
-.mytasks .card[data-status=true] .section label{
-border-color: rgb(185, 229, 185);
+.mytasks .card[data-status="true"] {
+  border-color: rgb(185, 229, 185);
+  background-color: rgb(185, 229, 185, 0.2);
 }
-.getModal{
+.mytasks .card[data-status="true"] .section label {
+  border-color: rgb(185, 229, 185);
+}
+.getModal {
   display: flex;
-flex: 0 1 auto;
-z-index: 1200;
-position: absolute;
-width: 100%;
-left: 0;
-top: 0;
-bottom: 0;
-justify-content: center;
-background: rgba(0, 0, 0, 0.85);
+  flex: 0 1 auto;
+  z-index: 1200;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
 }
-.card.getusername{
-  width:320px;
+.card.getusername {
+  width: 320px;
 }
 
-figure{
-  width:300px;
+figure {
+  width: 300px;
   text-align: center;
   margin: 0 auto;
-
 }
-figcaption{
+figcaption {
   color: #888;
-  padding: 20px 0 0 ;
-  font-size:16px;
+  padding: 20px 0 0;
+  font-size: 16px;
 }
