@@ -267,11 +267,11 @@ class TaskCard extends React.Component {
     });
 
     if (e.key == "Escape") {
-      var temp = [];
+      var temp = new Array();
       var taskRef = db.collection("todo-" + userId).doc(docId);
       taskRef.get().then(snapshot => {
         temp = snapshot.data().notes;
-        temp.push(this.state.addNote);
+
         taskRef
           .update(
             {
