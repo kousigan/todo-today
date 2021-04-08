@@ -267,12 +267,21 @@ class TaskCard extends React.Component {
     });
 
     if (e.key == "Escape") {
-      var taskref = db.collection("todo-" + userId).doc(docId);
-      taskref.get().then(snapshot => {
-        var ln = snapshot.data().notes;
-        taskref.update({ notes: this.state.addNote }).then(() => {
-          this.toggleAddNotes();
-        });
+      var temp = [];
+      var taskRef = db.collection("todo-" + userId).doc(docId);
+      taskRef.get().then(snapshot => {
+        temp = snapshot.data().notes;
+        temp.push(this.state.addNote);
+        taskRef
+          .update(
+            {
+              notes: temp
+            },
+            { merge: true }
+          )
+          .then(() => {
+            this.toggleAddNotes();
+          });
       });
     }
   };
@@ -312,7 +321,7 @@ class TaskCard extends React.Component {
           <textarea placeholder="add a note" onKeyDown={this.addANote} />
         </div>
 
-        <div class="controls button-group">
+        <div className="controls button-group">
           <button onClick={this.toggleEditTask}>
             <FeatherIcon icon="edit" />
             <span>Edit task</span>
