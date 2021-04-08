@@ -296,7 +296,12 @@ class TaskCard extends React.Component {
     }
   };
   render() {
-    // console.log(this.props.user);
+    // console.log(this.props.user);'
+    let noteIte,s
+    if (this.props.task.notes !== null) {
+      const notesList = this.props.task.notes.split("/-");
+      return notesList;
+    }
     return (
       <div
         className="card mytask"
@@ -324,7 +329,11 @@ class TaskCard extends React.Component {
         >
           <details>
             <summary>Notes</summary>
-            <ul>{this.props.task.notes}</ul>
+            <ul>
+              {notesList.map(note => {
+                <li>{note}</li>;
+              })}
+            </ul>
           </details>
         </div>
         <div
@@ -332,7 +341,11 @@ class TaskCard extends React.Component {
             this.state.showAddNote ? "show" : "hide"
           }`}
         >
-          <textarea placeholder="add a note" onKeyDown={this.addANote} />
+          <textarea
+            placeholder="add a note"
+            onKeyDown={this.addANote}
+            defaultValue={this.props.task.notes}
+          />
         </div>
 
         <div className="controls button-group">
