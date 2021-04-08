@@ -136,6 +136,7 @@ class App extends React.Component {
               id={task.id}
               name={task.name}
               status={task.status}
+              task={task}
             />
           ))}
         </div>
@@ -269,20 +270,29 @@ class TaskCard extends React.Component {
     if (e.key == "Escape") {
       var temp = new Array();
       var taskRef = db.collection("todo-" + userId).doc(docId);
-      taskRef.get().then(snapshot => {
-        temp = snapshot.data().notes;
+      taskRef
+        .update(
+          {
+            notes: this.state.addNote
+          },
+          { merge: true }
+        )
+        .then(() => {
+          this.toggleAddNotes();
+        });
+    }
+  };
+  requestDelete = e => {
+    const { docId, userId } = this.state;
 
-        taskRef
-          .update(
-            {
-              notes: temp
-            },
-            { merge: true }
-          )
-          .then(() => {
-            this.toggleAddNotes();
-          });
-      });
+    var temp = confirm("Are you sure?");
+    if (temp) {
+      db.collection("todo-" + userId)
+        .doc(docId)
+        .delete()
+        .then(() => {
+          return console.log("deletion successful!");
+        });
     }
   };
   render() {
@@ -307,10 +317,14 @@ class TaskCard extends React.Component {
         >
           <textarea placeholder="update post" onKeyDown={this.updateTask} />
         </div>
-        <div className="section">
+        <div
+          className={`section ${
+            this.props.task.notes == null ? "hide" : "show"
+          }`}
+        >
           <details>
             <summary>Notes</summary>
-            <ul>{""}</ul>
+            <ul>{this.props.task.notes}</ul>
           </details>
         </div>
         <div
@@ -329,7 +343,7 @@ class TaskCard extends React.Component {
           <button onClick={this.toggleAddNotes}>
             <FeatherIcon icon="book" /> <span>Add note</span>
           </button>
-          <button>
+          <button onClick={this.requestDelete}>
             <FeatherIcon icon="trash-2" /> <span>Delete task</span>
           </button>
         </div>
