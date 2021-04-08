@@ -189,7 +189,7 @@ class App extends React.Component {
           <div className="col-sm monthly-calendar ">
             <MonthlyCalendar fixDate={this.handleDate} />
           </div>
-          <div className=" .taskpanel col-lg-offset-1 col-lg-8">
+          <div className=" taskpanel col-offset-1 col-8">
             <h4> welcome {this.state.user == null ? "" : this.state.user}</h4>
             <TaskPanel today={newDay_} pushData={this.submitTask} user={user} />
             {this.state.userLoaded ? "" : this.getUserId()}
@@ -213,17 +213,19 @@ class TaskCard extends React.Component {
   }
 
   pushUpdate = e => {
-    var docId = e.target.getAttribute("data-key");
-    var userId = e.target.getAttribute("data-user");
-    // console.log(docId, userId);
-    var taskRef = db.collection("todo-" + userId).doc(docId);
-    taskRef.get().then(snapshot => {
-      if (!snapshot.data().status) {
-        return taskRef.update({ status: true });
-      } else {
-        return taskRef.update({ status: false });
-      }
-    });
+    if (e.target.getAttribute("data-key")) {
+      var docId = e.target.getAttribute("data-key");
+      var userId = e.target.getAttribute("data-user");
+      // console.log(docId, userId);
+      var taskRef = db.collection("todo-" + userId).doc(docId);
+      taskRef.get().then(snapshot => {
+        if (!snapshot.data().status) {
+          return taskRef.update({ status: true });
+        } else {
+          return taskRef.update({ status: false });
+        }
+      });
+    }
   };
   render() {
     // console.log(this.props.user);
@@ -239,6 +241,12 @@ class TaskCard extends React.Component {
           data-key={this.props.id}
         >
           <label className="status-icon" /> {this.props.name}{" "}
+        </div>
+        <div class="section">
+          <details>
+            <summary>Notes</summary>
+            nothing here
+          </details>
         </div>
         <div class="controls button-group">
           <button>
