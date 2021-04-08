@@ -104,7 +104,7 @@ figcaption {
 .card.mytask:hover .controls {
   display: flex;
   position: absolute;
-  margin: 2px;
+  margin: 0px;
   right: 0;
 }
 .controls button {
@@ -113,10 +113,16 @@ figcaption {
   align-items: center;
   border-color: #e0e0e0 !important;
   background-color: #f5f5f5;
+  grid-gap: 10px;
 }
-
+.controls button span {
+  display: none;
+}
+.controls button:hover span {
+  display: unset;
+}
 .button-group.controls {
-  border: 0;
+  border: 1px solid #e5e5e5;
 }
 details {
   border: 1px solid #e5e5e5;
@@ -138,4 +144,8 @@ details[open] {
 details[open] summary {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 0.5em;
+}
+
+.hide {
+  display: none !important;
 }

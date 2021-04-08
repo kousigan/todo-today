@@ -210,6 +210,10 @@ export default App;
 class TaskCard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showTaskUpdate: false,
+      showAddNote: false
+    };
   }
 
   pushUpdate = e => {
@@ -227,6 +231,16 @@ class TaskCard extends React.Component {
       });
     }
   };
+  toggleEditTask = e => {
+    this.setState({
+      showTaskUpdate: this.state.showTaskUpdate == false ? true : false
+    });
+  };
+  toggleAddNotes = e => {
+    this.setState({
+      showAddNote: this.state.showAddNote == false ? true : false
+    });
+  };
   render() {
     // console.log(this.props.user);
     return (
@@ -236,28 +250,47 @@ class TaskCard extends React.Component {
         data-status={this.props.status}
       >
         <div
-          className="section"
+          className="section section"
           data-user={this.props.user}
           data-key={this.props.id}
         >
           <label className="status-icon" /> {this.props.name}{" "}
         </div>
-        <div class="section">
+        <div
+          className={`section editTask ${
+            this.state.showTaskUpdate ? "show" : "hide"
+          }`}
+        >
+          edit content
+        </div>
+        <div className="section">
           <details>
             <summary>Notes</summary>
-            nothing here
+            <ul>
+              <li>note 1</li>
+              <li>note 2</li>
+            </ul>
           </details>
         </div>
+        <div
+          className={`section addNote ${
+            this.state.showAddNote ? "show" : "hide"
+          }`}
+        >
+          <form>
+          </form>
+        </div>
+
         <div class="controls button-group">
-          <button>
+          <button onClick={this.toggleEditTask}>
             <FeatherIcon icon="edit" />
-            Edit
+            <span>Edit task</span>
+          </button>
+          <button onClick={this.toggleAddNotes}>
+            <FeatherIcon icon="book" /> <span>Add note</span>
           </button>
           <button>
-            <FeatherIcon icon="book" /> Notes
-          </button>
-          <button>
-            <FeatherIcon icon="trash-2" /> Delete
+            <FeatherIcon icon="trash-2" /> <span>Delete task</span>
           </button>
         </div>
       </div>
