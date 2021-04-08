@@ -7,6 +7,7 @@ import { db } from "./db/config";
 import { nanoid } from "nanoid";
 import box from "./img/box.svg";
 import delivery from "./img/delivery.svg";
+import FeatherIcon from "feather-icons-react";
 import "./style.css";
 
 class App extends React.Component {
@@ -228,7 +229,7 @@ class TaskCard extends React.Component {
     // console.log(this.props.user);
     return (
       <div
-        className="card"
+        className="card mytask"
         onClick={this.pushUpdate}
         data-status={this.props.status}
       >
@@ -238,6 +239,18 @@ class TaskCard extends React.Component {
           data-key={this.props.id}
         >
           <label className="status-icon" /> {this.props.name}{" "}
+        </div>
+        <div class="controls button-group">
+          <button>
+            <FeatherIcon icon="edit" />
+            Edit
+          </button>
+          <button>
+            <FeatherIcon icon="book" /> Notes
+          </button>
+          <button>
+            <FeatherIcon icon="trash-2" /> Delete
+          </button>
         </div>
       </div>
     );

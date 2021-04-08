@@ -92,3 +92,21 @@ figcaption {
   padding: 20px 0 0;
   font-size: 16px;
 }
+/* controls */
+.controls {
+  display: none;
+}
+.card.mytask:hover .controls {
+  display: flex;
+}
+.controls button {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-color: #e0e0e0 !important;
+  background-color: #f5f5f5;
+}
+
+.button-group.controls {
+  border: 0;
+}
