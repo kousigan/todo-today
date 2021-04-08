@@ -212,7 +212,11 @@ class TaskCard extends React.Component {
     super(props);
     this.state = {
       showTaskUpdate: false,
-      showAddNote: false
+      showAddNote: false,
+      docId: this.props.id,
+      userId: this.props.user,
+      updateTask: "",
+      addNote: ""
     };
   }
 
@@ -241,6 +245,37 @@ class TaskCard extends React.Component {
       showAddNote: this.state.showAddNote == false ? true : false
     });
   };
+  updateTask = e => {
+    const { docId, userId } = this.state;
+    this.setState({
+      updateTask: e.target.value
+    });
+
+    if (e.key == "Escape") {
+      db.collection("todo-" + userId)
+        .doc(docId)
+        .update({ name: this.state.updateTask })
+        .then(() => {
+          this.toggleEditTask();
+        });
+    }
+  };
+  addANote = e => {
+    const { docId, userId } = this.state;
+    this.setState({
+      addNote: e.target.value
+    });
+
+    if (e.key == "Escape") {
+      var taskref = db.collection("todo-" + userId).doc(docId);
+      taskref.get().then(snapshot => {
+        var ln = snapshot.data().notes;
+        taskref.update({ notes: this.state.addNote }).then(() => {
+          this.toggleAddNotes();
+        });
+      });
+    }
+  };
   render() {
     // console.log(this.props.user);
     return (
@@ -261,15 +296,12 @@ class TaskCard extends React.Component {
             this.state.showTaskUpdate ? "show" : "hide"
           }`}
         >
-          edit content
+          <textarea placeholder="update post" onKeyDown={this.updateTask} />
         </div>
         <div className="section">
           <details>
             <summary>Notes</summary>
-            <ul>
-              <li>note 1</li>
-              <li>note 2</li>
-            </ul>
+            <ul>{""}</ul>
           </details>
         </div>
         <div
@@ -277,8 +309,7 @@ class TaskCard extends React.Component {
             this.state.showAddNote ? "show" : "hide"
           }`}
         >
-          <form>
-          </form>
+          <textarea placeholder="add a note" onKeyDown={this.addANote} />
         </div>
 
         <div class="controls button-group">
