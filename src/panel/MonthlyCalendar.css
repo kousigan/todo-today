@@ -20,7 +20,7 @@ h1.fmonth {
   position: -webkit-sticky;
   top: 0;
   z-index: 10;
-  background: linear-gradient(#f2f2f2 70%, transparent);
+  background: rgba(242, 242, 242, 1);
 }
 .calendar-day.Sunday {
   background-color: rgb(223, 200, 197);
