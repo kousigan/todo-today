@@ -38,7 +38,8 @@ class App extends React.Component {
       user: null,
       userLoaded: false,
       showerror: false,
-      slide: "slide-out"
+      slide: "slide-out",
+      search: false
     };
   }
 
@@ -185,6 +186,14 @@ class App extends React.Component {
       slide: this.state.slide == "slide-out" ? "slide-in" : "slide-out"
     });
   };
+  showHideSearch = e => {
+    console.log(e.target.value);
+  };
+  showSearchModal = () => {
+    this.setState({
+      search: this.state.search == true ? false : true
+    });
+  };
   render() {
     const newDay_ = this.state.fdate;
 
@@ -204,19 +213,28 @@ class App extends React.Component {
             <div className="row topbar">
               <h4> Welcome {this.state.user == null ? "" : this.state.user}</h4>{" "}
               <h5 onClick={this.slideCalendar}>
+                {months[newDay_.month]} {newDay_.day} {newDay_.name}{" "}
                 <FeatherIcon icon="calendar" />
-                {months[newDay_.month]} {newDay_.day} {newDay_.name}
               </h5>
+              <button className="search" onClick={this.showSearchModal}>
+                <FeatherIcon icon="search" />
+              </button>
             </div>
 
             <TaskPanel today={newDay_} pushData={this.submitTask} user={user} />
-            {this.state.userLoaded ? "" : this.getUserId()}
+
             <h3>Tasks</h3>
             {this.state.loadingData
               ? this.loadingData()
               : this.makeCards(this.state.theList)}
           </div>
         </div>
+        {this.state.userLoaded ? "" : this.getUserId()}
+        {this.state.search ? (
+          <Search user={this.state.user} click={this.showHideSearch} />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
@@ -224,3 +242,28 @@ class App extends React.Component {
 //             <TaskPanel today={newDay_} tasks={taskList} />
 
 export default App;
+
+class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.showHide();
+  }
+  showHide = () => {};
+  render() {
+    return (
+      <div className="overlay-container getModal">
+        <div className="card getSearchResults">
+          <div className="section">
+            <input
+              type="text"
+              id="searchtask"
+              placeholder="Enter atleast 4 characters"
+              onKeyDown={this.showHide}
+            />
+            <button>Hide</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}

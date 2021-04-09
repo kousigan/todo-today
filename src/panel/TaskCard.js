@@ -97,8 +97,10 @@ class TaskCard extends React.Component {
       }
     }
   };
+
   requestDelete = e => {
     const { docId, userId } = this.state;
+
     var temp = confirm("Are you sure?");
     if (temp) {
       db.collection("todo-" + userId)
@@ -129,7 +131,7 @@ class TaskCard extends React.Component {
           data-user={this.props.user}
           data-key={this.props.id}
         >
-          <button className="status-indicator">
+          <button class="status-indicator">
             {" "}
             <FeatherIcon icon="check-circle" />
           </button>
@@ -169,6 +171,7 @@ class TaskCard extends React.Component {
             defaultValue={this.props.task.notes}
           />
         </div>
+
         <div className="controls button-group">
           <button onClick={this.toggleEditTask}>
             <FeatherIcon icon="edit" />
