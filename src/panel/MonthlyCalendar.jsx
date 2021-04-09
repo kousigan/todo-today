@@ -79,15 +79,13 @@ class MonthlyCalendar extends Component {
  
         <div className="button-group">
           <button onClick={this.toggleGrid}>
-            {" "}
-            <i className="lni lni-list" />
+            <FeatherIcon icon="list"/>
           </button>
           <button onClick={this.prevMonth}>
-            <i className="lni lni-chevron-up" />
+            <FeatherIcon icon="arrow-up"/>
           </button>
           <button onClick={this.nextMonth}>
-            {" "}
-            <i className="lni lni-chevron-down" />
+           <FeatherIcon icon="arrow-down"/>
           </button>
         </div>
         <h1 className="fmonth">

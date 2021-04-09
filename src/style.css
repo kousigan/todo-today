@@ -106,21 +106,20 @@ h1 button.small {
   grid-gap: 10px;
   height: 100%;
 }
-.mytasks .card .section label {
-  float: left;
-  width: 8px;
-  height: 4px;
-  margin-bottom: 10px;
-  border-bottom: 4px solid #efefef;
-  border-left: 4px solid #efefef;
-  transform: rotateZ(-45deg);
+.mytasks .card .section .status-indicator {
+  align-self: start;
+  margin: 0;
+  background: none !important;
+  color: #ddd;
+  padding: 2px 0 0;
+  line-height: 0;
 }
 .mytasks .card[data-status="true"] {
   border-color: rgb(185, 229, 185);
   background-color: rgb(185, 229, 185, 0.2);
 }
-.mytasks .card[data-status="true"] .section label {
-  border-color: rgb(185, 229, 185);
+.mytasks .card[data-status="true"] .section .status-indicator {
+  color: rgb(174, 214, 174);
 }
 .getModal {
   display: flex;
@@ -158,7 +157,7 @@ figcaption {
 .card.mytask:hover .controls {
   display: flex;
   position: absolute;
-  margin: 0px;
+  margin: 1px;
   right: 0;
 }
 .controls button {
