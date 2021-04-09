@@ -293,3 +293,16 @@ button.search {
   flex: 1;
   margin: 0 10px 0 0;
 }
+.section.resultItem {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.section.resultItem button {
+  margin: 0 10px 0 0;
+}
+.section.resultItem:hover {
+  white-space: normal;
+  text-overflow: unset;
+}

@@ -277,7 +277,7 @@ class Search extends React.Component {
     console.log("render", this.state.results);
     const { results } = this.state;
     var listItems = results.map((item, i) => (
-      <div className="section" key={i}>
+      <div className="section resultItem" key={i}>
         <button>
           {months[item.date.month]} {item.date.day} {item.date.year}{" "}
         </button>{" "}
