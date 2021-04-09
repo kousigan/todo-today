@@ -149,3 +149,28 @@ details[open] summary {
 .hide {
   display: none !important;
 }
+
+@media screen and (max-width: 1366px) {
+  body .container .row .taskpanel {
+    width: calc(95% - 300px);
+  }
+  .taskpanel .row .col-lg {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 1020px) {
+  .mytasks.card-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .monthly-calendar {
+    position: absolute;
+    z-index: 11;
+    box-shadow: 40px 4px 48px rgba(0 0 0/0.2);
+  }
+  body .container .row .taskpanel {
+    width: 95%;
+  }
+}
