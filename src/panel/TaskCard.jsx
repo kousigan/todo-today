@@ -57,7 +57,7 @@ class TaskCard extends React.Component {
           },()=>{
               taskRef.update(
                 {
-                  field: this.state.addNote
+                  notes: this.state.addNote
                 },
                 { merge: true }
               )
@@ -78,44 +78,7 @@ class TaskCard extends React.Component {
       }
     }
   }
-  updateTask = e => {
-    const { docId, userId } = this.state;
-    this.setState({
-      updateTask: e.target.value
-    });
 
-    if (e.key == "Escape") {
-      db.collection("todo-" + userId)
-        .doc(docId)
-        .update({ name: this.state.updateTask })
-        .then(() => {
-          this.toggleEditTask();
-        });
-    }
-  };
-  addANote = e => {
-    const { docId, userId } = this.state;
-     if (e.key == "Enter") {
-            var taskRef = db.collection("todo-" + userId).doc(docId)
-
-    this.setState({
-      addNote: e.target.value
-    },()=>{
-
-    
-        taskRef.update(
-          {
-            notes: this.state.addNote
-          },
-          { merge: true }
-        )
-        .then(() => {
-          this.toggleAddNotes();
-        });
-        });
-    
-    }
-  };
   requestDelete = e => {
     const { docId, userId } = this.state;
 
