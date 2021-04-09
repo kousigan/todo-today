@@ -246,14 +246,48 @@ export default App;
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.showHide();
+    this.state = {
+      results: []
+    };
   }
-  showHide = () => {};
+  showHide = e => {
+    var query = e.target.value;
+    if (query.length > 4) {
+      console.log("test");
+      db.collection("todo-kousi")
+        .get()
+        .then(snapshot => {
+          const temp = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          var sr = temp.filter(li => li.name.includes(query));
+          this.setState({
+            results: sr
+          });
+        });
+    }
+  };
+  checkDuplicate = (arr, item) => {
+    var temp = arr.some(li => li.id == item.id);
+    return temp;
+  };
+
   render() {
+    console.log("render", this.state.results);
+    const { results } = this.state;
+    var listItems = results.map((item, i) => (
+      <div className="section" key={i}>
+        <button>
+          {months[item.date.month]} {item.date.day} {item.date.year}{" "}
+        </button>{" "}
+        {item.name}
+      </div>
+    ));
     return (
       <div className="overlay-container getModal">
         <div className="card getSearchResults">
-          <div className="section">
+          <div className="section input">
             <input
               type="text"
               id="searchtask"
@@ -262,6 +296,7 @@ class Search extends React.Component {
             />
             <button>Hide</button>
           </div>
+          {listItems}
         </div>
       </div>
     );

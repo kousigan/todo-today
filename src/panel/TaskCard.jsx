@@ -50,7 +50,6 @@ class TaskCard extends React.Component {
     if (e.key == "Enter") {
       var taskRef = db.collection("todo-" + userId).doc(docId);
       var field = e.target.getAttribute("data-field");
-      console.log(field);
       if (field == "notes") {
         this.setState(
           {

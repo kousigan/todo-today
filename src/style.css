@@ -283,13 +283,13 @@ button.search {
   width: 90%;
   max-width: 640px;
 }
-.getSearchResults .section {
+.getSearchResults .section.input {
   display: flex;
 }
-.getSearchResults .section button {
+.getSearchResults .section.input button {
   margin: 0;
 }
-.getSearchResults .section input {
+.getSearchResults .section.input input {
   flex: 1;
   margin: 0 10px 0 0;
 }
