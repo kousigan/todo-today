@@ -45,6 +45,39 @@ class TaskCard extends React.Component {
       showAddNote: this.state.showAddNote == false ? true : false
     });
   };
+  updateTarget = e =>{
+     const { docId, userId } = this.state;
+     if (e.key == "Enter") {
+            var taskRef = db.collection("todo-" + userId).doc(docId)
+            var field=e.target.getAttribute("data-field");
+            console.log(field)
+      if(field=="notes"){
+          this.setState({
+            addNote: e.target.value
+          },()=>{
+              taskRef.update(
+                {
+                  field: this.state.addNote
+                },
+                { merge: true }
+              )
+              .then(() => {
+                this.toggleAddNotes();
+              });
+            });
+      }
+       if(field=="name"){
+          this.setState({
+      updateTask: e.target.value
+          },()=>{
+              taskRef.update({ name: this.state.updateTask })
+              .then(() => {
+                this.toggleEditTask();
+              });
+            });
+      }
+    }
+  }
   updateTask = e => {
     const { docId, userId } = this.state;
     this.setState({
@@ -62,15 +95,15 @@ class TaskCard extends React.Component {
   };
   addANote = e => {
     const { docId, userId } = this.state;
+     if (e.key == "Enter") {
+            var taskRef = db.collection("todo-" + userId).doc(docId)
+
     this.setState({
       addNote: e.target.value
-    });
+    },()=>{
 
-    if (e.key == "Escape") {
-      var temp = new Array();
-      var taskRef = db.collection("todo-" + userId).doc(docId);
-      taskRef
-        .update(
+    
+        taskRef.update(
           {
             notes: this.state.addNote
           },
@@ -79,6 +112,8 @@ class TaskCard extends React.Component {
         .then(() => {
           this.toggleAddNotes();
         });
+        });
+    
     }
   };
   requestDelete = e => {
@@ -121,7 +156,7 @@ class TaskCard extends React.Component {
             this.state.showTaskUpdate ? "show" : "hide"
           }`}
         >
-          <textarea placeholder="update post" onKeyDown={this.updateTask} />
+          <textarea data-field="name" placeholder="update post" onKeyDown={this.updateTarget}  defaultValue={this.props.name} />
         </div>
         <div
           className={`section ${
@@ -139,8 +174,9 @@ class TaskCard extends React.Component {
           }`}
         >
           <textarea
+          data-field="notes"
             placeholder="add a note"
-            onKeyDown={this.addANote}
+            onKeyDown={this.updateTarget}
             defaultValue={this.props.task.notes}
           />
         </div>
