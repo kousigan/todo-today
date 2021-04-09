@@ -297,10 +297,12 @@ class TaskCard extends React.Component {
   };
   render() {
     // console.log(this.props.user);'
-    let noteIte,s
-    if (this.props.task.notes !== null) {
-      const notesList = this.props.task.notes.split("/-");
-      return notesList;
+    var notes = this.props.task.notes;
+    var notesList = [];
+    var listItems;
+    if (notes !== null) {
+      notesList = notes.split("/-");
+      listItems = notesList.map((note, i) => <li key={i}>{note}</li>);
     }
     return (
       <div
@@ -329,11 +331,7 @@ class TaskCard extends React.Component {
         >
           <details>
             <summary>Notes</summary>
-            <ul>
-              {notesList.map(note => {
-                <li>{note}</li>;
-              })}
-            </ul>
+            <ul>{listItems}</ul>
           </details>
         </div>
         <div
