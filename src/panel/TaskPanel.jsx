@@ -72,7 +72,7 @@ class TasksPanel extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md">
+          <div className="col-lg">
             <textarea
               placeholder="enter todo"
               id="myTextarea"

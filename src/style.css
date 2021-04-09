@@ -228,4 +228,12 @@ details[open] summary {
     order: 2;
     margin-right: 1px;
   }
+  body
+    .container
+    .row
+    .monthly-calendar.slide-in
+    + .taskpanel
+    .mytasks.card-list {
+    grid-template-columns: 1fr;
+  }
 }
