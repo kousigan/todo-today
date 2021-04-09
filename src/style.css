@@ -11,6 +11,7 @@ body .container .row .taskpanel {
   overflow-y: auto;
   width: calc(80% - 300px);
   margin: 0 auto;
+  padding: 0 10%;
 }
 .calendar-panel {
   background-color: #f2f2f2;
@@ -54,8 +55,21 @@ body .container .row .taskpanel {
 
   transition: box-shadow 0.1s linear 0.9s;
 }
+@media screen and (min-width: 768px) {
+  .monthly-calendar.slide-in {
+    position: inherit;
+  }
+}
 .topbar {
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #f8f8f8;
+  z-index: 10;
+  align-items: center;
+}
+.topbar h5 {
+  display: none;
 }
 .topbar .calendarToggle {
   margin-left: 1px;
@@ -193,7 +207,9 @@ details[open] summary {
 @media screen and (max-width: 1366px) {
   body .container .row .taskpanel {
     width: calc(95% - 300px);
+    padding: 0 2.5%;
   }
+
   .taskpanel .row .col-lg {
     width: 100%;
   }
@@ -202,16 +218,14 @@ details[open] summary {
   .mytasks.card-list {
     grid-template-columns: 1fr;
   }
-  body .container .row .monthly-calendar.slide-in + .taskpanel {
-    width: 95%;
-  }
+
   body
     .container
     .row
     .monthly-calendar.slide-in
     + .taskpanel
     .mytasks.card-list {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -223,6 +237,7 @@ details[open] summary {
   }
   body .container .row .taskpanel {
     width: 95%;
+    padding: 0 2.5%;
   }
   .calendarToggle {
     order: 2;
@@ -235,5 +250,23 @@ details[open] summary {
     + .taskpanel
     .mytasks.card-list {
     grid-template-columns: 1fr;
+  }
+
+  .controls.button-group {
+    flex-direction: row;
+  }
+  .controls.button-group button {
+    border-top: none;
+    border-left: 0.0625rem solid var(--button-group-border-color);
+  }
+  .date-large {
+    display: none;
+  }
+  .topbar h5 {
+    background: #efefef;
+    padding: 8px 20px 10px;
+    display: flex;
+    grid-gap: 10px;
+    border-radius: 20px;
   }
 }

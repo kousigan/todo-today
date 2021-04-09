@@ -13,7 +13,7 @@
 .calendar-day.primary {
   background-color: var(--pre-color);
 }
-h1 {
+h1.fmonth {
   margin: 0;
   padding: 20px 10px;
   position: sticky;

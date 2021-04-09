@@ -90,7 +90,7 @@ class MonthlyCalendar extends Component {
             <i className="lni lni-chevron-down" />
           </button>
         </div>
-        <h1>
+        <h1 className="fmonth">
           {months[this.state.focused.month]}{" "}
           <small>{this.state.focused.year}</small>{" "}
         </h1>

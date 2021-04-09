@@ -59,7 +59,7 @@ class TasksPanel extends Component {
     const taskList = this.props.tasks;
     return (
       <div>
-        <div className="row">
+        <div className="row date-large">
           <div className="col-lg">
             <h1>
               {months[focusedTaskId.month] +
