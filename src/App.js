@@ -36,7 +36,8 @@ class App extends React.Component {
       loadingData: true,
       user: null,
       userLoaded: false,
-      showerror: false
+      showerror: false,
+      slide: "slide-out"
     };
   }
 
@@ -178,6 +179,11 @@ class App extends React.Component {
         });
     }
   };
+  slideCalendar = () => {
+    this.setState({
+      slide: this.state.slide == "slide-out" ? "slide-in" : "slide-out"
+    });
+  };
   render() {
     const newDay_ = this.state.fdate;
 
@@ -187,11 +193,20 @@ class App extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-sm monthly-calendar ">
-            <MonthlyCalendar fixDate={this.handleDate} />
+          <div className={`col-sm monthly-calendar ${this.state.slide}`}>
+            <MonthlyCalendar
+              fixDate={this.handleDate}
+              slide={this.state.slide}
+            />
           </div>
           <div className=" taskpanel col-offset-1 col-8">
-            <h4> welcome {this.state.user == null ? "" : this.state.user}</h4>
+            <div className="row topbar">
+              <button className="calendarToggle" onClick={this.slideCalendar}>
+                <FeatherIcon icon="menu" />
+              </button>
+              <h4> welcome {this.state.user == null ? "" : this.state.user}</h4>{" "}
+            </div>
+
             <TaskPanel today={newDay_} pushData={this.submitTask} user={user} />
             {this.state.userLoaded ? "" : this.getUserId()}
             <h3>Tasks</h3>

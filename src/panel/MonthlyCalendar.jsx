@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { days, months } from "./names";
 import "./MonthlyCalendar.css";
+import FeatherIcon from "feather-icons-react";
 
 class MonthlyCalendar extends Component {
   constructor(props) {
@@ -13,8 +14,8 @@ class MonthlyCalendar extends Component {
         year: null,
         length: null
       },
-      grid: true
-    };
+      grid: true,
+     };
   }
   toggleGrid = () => {
     if (this.state.grid == true) {
@@ -71,10 +72,11 @@ class MonthlyCalendar extends Component {
   setDay = e => {
     this.props.fixDate(e.target);
   };
-
+ 
   render() {
     return (
-      <div>
+      <div  >
+ 
         <div className="button-group">
           <button onClick={this.toggleGrid}>
             {" "}

@@ -23,6 +23,43 @@ body .container .row .taskpanel {
   height: 100vh;
   overflow: auto;
 }
+.monthly-calendar.slide-in {
+  position: absolute;
+  left: -300px;
+  z-index: 11;
+}
+@keyframes slidingIn {
+  from {
+    left: 0;
+  }
+  to {
+    left: -300px;
+  }
+}
+@keyframes slidingOut {
+  from {
+    left: -300px;
+  }
+  to {
+    left: 0;
+  }
+}
+.monthly-calendar.slide-out {
+  animation: slidingOut 0.5s;
+}
+.monthly-calendar.slide-in {
+  animation-name: slidingIn;
+  animation-duration: 1s;
+  box-shadow: 0 0 0 transparent;
+
+  transition: box-shadow 0.1s linear 0.9s;
+}
+.topbar {
+  justify-content: space-between;
+}
+.topbar .calendarToggle {
+  margin-left: 1px;
+}
 textarea {
   width: 100%;
   margin: 10px 0;
@@ -97,6 +134,9 @@ figcaption {
   padding: 20px 0 0;
   font-size: 16px;
 }
+.calendarToggle {
+  line-height: 0;
+}
 /* controls */
 .controls {
   display: none;
@@ -162,6 +202,17 @@ details[open] summary {
   .mytasks.card-list {
     grid-template-columns: 1fr;
   }
+  body .container .row .monthly-calendar.slide-in + .taskpanel {
+    width: 95%;
+  }
+  body
+    .container
+    .row
+    .monthly-calendar.slide-in
+    + .taskpanel
+    .mytasks.card-list {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -172,5 +223,9 @@ details[open] summary {
   }
   body .container .row .taskpanel {
     width: 95%;
+  }
+  .calendarToggle {
+    order: 2;
+    margin-right: 1px;
   }
 }
