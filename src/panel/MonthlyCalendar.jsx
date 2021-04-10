@@ -122,7 +122,7 @@ const Mday = props => {
               ? "primary"
               : ""
           } ${getDayName([i + 1, md.m, md.y])}`}
-          tooltip={getDayName([i + 1, md.m, md.y])}
+          data-dayname={getDayName([i + 1, md.m, md.y])}
           key={i + 1}
         >
           <span> {getDayName([i + 1, md.m, md.y])}</span>

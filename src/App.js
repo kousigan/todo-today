@@ -45,7 +45,7 @@ class App extends React.Component {
 
   handleDate = e => {
     var temp = {
-      name: e.getAttribute("tooltip"),
+      name: e.getAttribute("data-dayname"),
       day: e.getAttribute("data-day"),
       month: e.getAttribute("data-month"),
       year: e.getAttribute("data-year")
@@ -186,12 +186,20 @@ class App extends React.Component {
       slide: this.state.slide == "slide-out" ? "slide-in" : "slide-out"
     });
   };
-  showHideSearch = e => {
-    console.log(e.target.value);
+  showHideSearch = () => {
+    this.setState({
+      search: false
+    });
+  };
+  selectDate = e => {
+    this.handleDate(e);
+    this.setState({
+      search: false
+    });
   };
   showSearchModal = () => {
     this.setState({
-      search: this.state.search == true ? false : true
+      search: true
     });
   };
   render() {
@@ -231,7 +239,11 @@ class App extends React.Component {
         </div>
         {this.state.userLoaded ? "" : this.getUserId()}
         {this.state.search ? (
-          <Search user={this.state.user} click={this.showHideSearch} />
+          <Search
+            user={this.state.user}
+            select={this.selectDate}
+            hide={this.showHideSearch}
+          />
         ) : (
           ""
         )}
@@ -250,7 +262,7 @@ class Search extends React.Component {
       results: []
     };
   }
-  showHide = e => {
+  querySearch = e => {
     var query = e.target.value;
     if (query.length > 4) {
       console.log("test");
@@ -272,13 +284,24 @@ class Search extends React.Component {
     var temp = arr.some(li => li.id == item.id);
     return temp;
   };
-
+  hideSearch = () => {
+    this.props.hide(false);
+  };
+  chooseDate = e => {
+    this.props.select(e.target);
+  };
   render() {
     console.log("render", this.state.results);
     const { results } = this.state;
     var listItems = results.map((item, i) => (
       <div className="section resultItem" key={i}>
-        <button>
+        <button
+          data-day={item.date.day}
+          data-month={item.date.month}
+          data-year={item.date.year}
+          data-dayname={item.date.name}
+          onClick={this.chooseDate}
+        >
           {months[item.date.month]} {item.date.day} {item.date.year}{" "}
         </button>{" "}
         {item.name}
@@ -292,9 +315,9 @@ class Search extends React.Component {
               type="text"
               id="searchtask"
               placeholder="Enter atleast 4 characters"
-              onKeyDown={this.showHide}
+              onKeyDown={this.querySearch}
             />
-            <button>Hide</button>
+            <button onClick={this.hideSearch}>Hide</button>
           </div>
           {listItems}
         </div>
