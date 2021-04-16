@@ -107,7 +107,12 @@ class App extends React.Component {
     // this.setState({ userLoaded: true });
   };
   errorMessage = () => {
-    return <div className="section">nope.. try agin!!</div>;
+    return (
+      <div className="section error">
+        <FeatherIcon icon="x" />
+        <span>Nope.. try agin!!</span>
+      </div>
+    );
   };
   getUserId = () => {
     return (
@@ -124,6 +129,16 @@ class App extends React.Component {
           {this.state.showerror ? this.errorMessage() : ""}
         </div>
       </div>
+    );
+  };
+
+  searchTask = () => {
+    return (
+      <Search
+        user={this.state.user}
+        select={this.selectDate}
+        hide={this.showHideSearch}
+      />
     );
   };
 
@@ -210,7 +225,9 @@ class App extends React.Component {
 
     return (
       <div className="container">
-        <div className="row">
+        {this.state.userLoaded ? "" : this.getUserId()}
+        {this.state.search ? this.searchTask() : ""}
+        <div className="row main-content">
           <div className={`col-sm monthly-calendar ${this.state.slide}`}>
             <MonthlyCalendar
               fixDate={this.handleDate}
@@ -237,16 +254,6 @@ class App extends React.Component {
               : this.makeCards(this.state.theList)}
           </div>
         </div>
-        {this.state.userLoaded ? "" : this.getUserId()}
-        {this.state.search ? (
-          <Search
-            user={this.state.user}
-            select={this.selectDate}
-            hide={this.showHideSearch}
-          />
-        ) : (
-          ""
-        )}
       </div>
     );
   }

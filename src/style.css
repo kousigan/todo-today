@@ -131,12 +131,45 @@ h1 button.small {
   top: 0;
   bottom: 0;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.5);
+}
+.getModal + .main-content {
+  filter: blur(10px);
 }
 .card.getusername {
   width: 320px;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background: #f4f1de;
 }
-
+.card.getusername h3 {
+  border: 0;
+  padding: 10px 8px 40px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #3d405b;
+  background: none;
+}
+.card.getusername label {
+  color: #a19c81;
+}
+.getModal input {
+  border: 0;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1) inset;
+  letter-spacing: 2px;
+  color: #666;
+}
+.section.error {
+  background: no-repeat;
+  color: #e07a5f;
+  padding: 10px 10px 0;
+  display: flex;
+  align-items: center;
+}
+.section.error span {
+  padding: 0 10px;
+}
 figure {
   width: 300px;
   text-align: center;
