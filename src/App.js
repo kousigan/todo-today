@@ -238,7 +238,8 @@ class App extends React.Component {
             <div className="row topbar">
               <h4> Welcome {this.state.user == null ? "" : this.state.user}</h4>{" "}
               <h5 onClick={this.slideCalendar}>
-                {months[newDay_.month]} {newDay_.day} {newDay_.name}{" "}
+                {months[newDay_.month]} {newDay_.day}
+                <span> {newDay_.name}</span>
                 <FeatherIcon icon="calendar" />
               </h5>
               <button className="search" onClick={this.showSearchModal}>
