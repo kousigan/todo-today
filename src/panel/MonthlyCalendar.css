@@ -13,6 +13,8 @@
 .calendar-day.primary {
   background-color: var(--pre-color);
   color: #fff;
+  text-decoration-line: overline;
+  text-decoration-thickness: 3px;
 }
 h1.fmonth {
   margin: 0;
@@ -91,9 +93,11 @@ div[data-makegrid] {
   background: #333;
   color: #e6e6e6;
   font-size: 10px;
-  padding: 3px;
+  padding: 1px;
   border-radius: 4px;
-  top: -10px;
+  top: 0px;
+  right: 0;
+  left: 0;
 }
 div[data-makegrid="false"] .calendar-day::after {
   top: 10px;

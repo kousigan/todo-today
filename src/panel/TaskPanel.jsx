@@ -64,9 +64,9 @@ class TasksPanel extends Component {
             <h1>
               {months[focusedTaskId.month] +
                 " " +
-                focusedTaskId.day +
-                " " +
-                focusedTaskId.name}{" "}
+                focusedTaskId.day }
+                 <span>
+                {focusedTaskId.name}</span>
               {/* <button className="small">todo</button> */}
             </h1>
           </div>

@@ -86,7 +86,9 @@ h1 button.small {
 }
 .date-large h1 {
   font-weight: bold;
-  color: #3d405b;
+  color: #b6b8ca;
+  font-family: Antonio;
+  font-size: 48px;
 }
 
 .mytasks.card-list {
@@ -145,18 +147,22 @@ h1 button.small {
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  background: #f4f1de;
+  background: #fff;
+  border: 4px solid #e8e8e8;
 }
 .card.getusername h3 {
   border: 0;
   padding: 10px 8px 40px;
   font-size: 32px;
   font-weight: bold;
-  color: #3d405b;
+  color: #b6b8ca;
   background: none;
+  font-family: Antonio;
 }
+
 .card.getusername label {
   color: #a19c81;
+  display: none;
 }
 .getModal input {
   border: 0;
