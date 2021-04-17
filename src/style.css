@@ -90,7 +90,11 @@ h1 button.small {
   font-family: Antonio;
   font-size: 48px;
 }
-
+.date-large h1 span {
+  font-family: Antonio;
+  padding: 0 0 0 10px;
+  color: #dcdde8;
+}
 .mytasks.card-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -105,12 +109,14 @@ h1 button.small {
   max-width: unset;
   align-self: flex-start;
   margin: 0;
+  border-radius: 8px;
 }
 .mytasks .card .section {
   display: flex;
   background: none;
   grid-gap: 10px;
   height: 100%;
+  flex-direction: column;
 }
 .mytasks .card .section .status-indicator {
   align-self: start;
@@ -207,23 +213,30 @@ figcaption {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border-color: #e0e0e0 !important;
-  background-color: #f5f5f5;
+  border: none !important;
+  background-color: transparent;
   grid-gap: 10px;
+  color: #3d405b;
+  opacity: 0.5;
+  transition: all 0.3s ease-in;
 }
 .controls button span {
   display: none;
+  transition: all 0.3s ease-in 0.3s;
+}
+.controls button:hover {
+  opacity: 1;
 }
 .controls button:hover span {
   display: unset;
+  transition: all 0.3s ease-in 1s;
 }
 .button-group.controls {
-  border: 1px solid #e5e5e5;
+  border: 0px solid #e5e5e5;
 }
 details {
   border: 1px solid #e5e5e5;
   border-radius: 4px;
-  width: 100%;
   padding: 0.5em 0.5em 0;
 }
 

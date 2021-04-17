@@ -133,7 +133,7 @@ class TaskCard extends React.Component {
         >
           <button class="status-indicator">
             {" "}
-            <FeatherIcon icon="check-circle" />
+            <FeatherIcon icon="check" />
           </button>
           {this.props.name}{" "}
         </div>
