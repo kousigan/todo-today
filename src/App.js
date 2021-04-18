@@ -246,13 +246,18 @@ class App extends React.Component {
                 <FeatherIcon icon="search" />
               </button>
             </div>
+            <div class="wrapper">
+              <TaskPanel
+                today={newDay_}
+                pushData={this.submitTask}
+                user={user}
+              />
 
-            <TaskPanel today={newDay_} pushData={this.submitTask} user={user} />
-
-            <h3>Tasks</h3>
-            {this.state.loadingData
-              ? this.loadingData()
-              : this.makeCards(this.state.theList)}
+              <h3>Tasks</h3>
+              {this.state.loadingData
+                ? this.loadingData()
+                : this.makeCards(this.state.theList)}
+            </div>
           </div>
         </div>
       </div>

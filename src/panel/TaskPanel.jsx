@@ -58,7 +58,7 @@ class TasksPanel extends Component {
     const focusedTaskId = this.props.today;
     const taskList = this.props.tasks;
     return (
-      <div>
+      <div >
         <div className="row date-large">
           <div className="col-lg">
             <h1>
