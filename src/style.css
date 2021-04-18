@@ -9,9 +9,13 @@ body .container {
 body .container .row .taskpanel {
   max-height: 100vh;
   overflow-y: auto;
-  width: calc(80% - 300px);
+  width: auto;
   margin: 0 auto;
-  padding: 0 10%;
+  padding: 0 5%;
+  flex-grow: 1;
+}
+.row.main-content {
+  flex-direction: row;
 }
 .calendar-panel {
   background-color: #f2f2f2;
@@ -23,6 +27,7 @@ body .container .row .taskpanel {
   background-color: #f2f2f2;
   height: 100vh;
   overflow: auto;
+  min-width: 300px;
 }
 .monthly-calendar.slide-in {
   position: absolute;
@@ -261,7 +266,6 @@ details[open] summary {
 
 @media screen and (max-width: 1366px) {
   body .container .row .taskpanel {
-    width: calc(95% - 300px);
     padding: 0 2.5%;
   }
 
