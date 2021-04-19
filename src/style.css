@@ -85,6 +85,13 @@ body .container .row .taskpanel {
 .topbar .calendarToggle {
   margin-left: 1px;
 }
+.topbar-right-section {
+  flex-direction: row;
+  display: flex;
+}
+.topbar-right-section button {
+  background: none;
+}
 textarea {
   width: 100%;
   margin: 10px 0;
@@ -168,7 +175,7 @@ h1 button.small {
   background: #fff;
   border: 4px solid #e8e8e8;
 }
-.card.getusername h3 {
+.card h3.section {
   border: 0;
   padding: 10px 8px 40px;
   font-size: 32px;
@@ -342,8 +349,11 @@ button.search {
   line-height: 0;
 }
 .getSearchResults.card {
-  width: 90%;
   max-width: 640px;
+  padding: 40px 20px;
+  margin: 10px;
+  border: 4px solid #e8e8e8;
+  border-radius: 8px;
 }
 .getSearchResults .section.input {
   display: flex;
@@ -363,6 +373,10 @@ button.search {
 
 .section.resultItem button {
   margin: 0 10px 0 0;
+  display: inline-flex;
+  background: none;
+  grid-gap: 10px;
+  text-decoration: underline;
 }
 .section.resultItem:hover {
   white-space: normal;

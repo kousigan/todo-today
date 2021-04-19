@@ -237,14 +237,16 @@ class App extends React.Component {
           <div className=" taskpanel col-offset-1 col-8">
             <div className="row topbar">
               <h4> Welcome {this.state.user == null ? "" : this.state.user}</h4>{" "}
-              <h5 onClick={this.slideCalendar}>
-                {months[newDay_.month]} {newDay_.day}
-                <span> {newDay_.name}</span>
-                <FeatherIcon icon="calendar" />
-              </h5>
-              <button className="search" onClick={this.showSearchModal}>
-                <FeatherIcon icon="search" />
-              </button>
+              <span className=" topbar-right-section">
+                <button className="search" onClick={this.showSearchModal}>
+                  <FeatherIcon icon="search" />
+                </button>
+                <h5 onClick={this.slideCalendar}>
+                  {months[newDay_.month]} {newDay_.day}
+                  <span> {newDay_.name}</span>
+                  <FeatherIcon icon="calendar" />
+                </h5>
+              </span>
             </div>
             <div class="wrapper">
               <TaskPanel
@@ -316,6 +318,7 @@ class Search extends React.Component {
           onClick={this.chooseDate}
         >
           {months[item.date.month]} {item.date.day} {item.date.year}{" "}
+          <FeatherIcon icon="arrow-right" />
         </button>{" "}
         {item.name}
       </div>
@@ -323,6 +326,7 @@ class Search extends React.Component {
     return (
       <div className="overlay-container getModal">
         <div className="card getSearchResults">
+          <h3 class="section">Search tasks</h3>
           <div className="section input">
             <input
               type="text"
