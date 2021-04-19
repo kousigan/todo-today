@@ -16,14 +16,20 @@
   text-decoration-line: overline;
   text-decoration-thickness: 3px;
 }
-h1.fmonth {
+.fmonth {
   margin: 0;
-  padding: 20px 10px;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-  z-index: 10;
+  padding: 10px;
+  border-width: 0px !important;
   background: rgba(242, 242, 242, 1);
+  border-color: rgb(85, 91, 110) !important;
+  line-height: 1;
+  font-family: Antonio;
+}
+.toggle-calendar-view {
+  line-height: 0;
+}
+.fmonth small {
+  color: rgba(85, 91, 110, 0.7);
 }
 .calendar-day.Sunday {
   background-color: rgb(223, 200, 197);
@@ -111,4 +117,10 @@ div[data-makegrid="false"] .calendar-day::after {
 }
 .monthly-calendar .button-group {
   border: none;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 10;
+  margin: 0;
+  background: #f2f2f2;
 }

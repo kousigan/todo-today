@@ -76,22 +76,24 @@ class MonthlyCalendar extends Component {
   render() {
     return (
       <div  >
- 
-        <div className="button-group">
-          <button onClick={this.toggleGrid}>
+ <button onClick={this.toggleGrid} class="toggle-calendar-view">
             <FeatherIcon icon="list"/>
           </button>
+        <div className="button-group">
+          
+          
           <button onClick={this.prevMonth}>
-            <FeatherIcon icon="arrow-up"/>
+            <FeatherIcon icon="arrow-left"/>
           </button>
-          <button onClick={this.nextMonth}>
-           <FeatherIcon icon="arrow-down"/>
-          </button>
-        </div>
-        <h1 className="fmonth">
+          <h2 className="fmonth">
           {months[this.state.focused.month]}{" "}
           <small>{this.state.focused.year}</small>{" "}
-        </h1>
+        </h2>
+          <button onClick={this.nextMonth}>
+           <FeatherIcon icon="arrow-right"/>
+          </button>
+        </div>
+        
         <div data-makegrid={this.state.grid ? true : false}>
           <Mday md={this.state.focused} click={this.setDay} />
         </div>
