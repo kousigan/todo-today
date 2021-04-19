@@ -106,4 +106,9 @@ div[data-makegrid="false"] .calendar-day::after {
 }
 .monthly-calendar .button-group button {
   line-height: 0;
+  border: 0;
+  background: none;
+}
+.monthly-calendar .button-group {
+  border: none;
 }
