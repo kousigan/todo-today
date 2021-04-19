@@ -276,8 +276,8 @@ class Search extends React.Component {
     };
   }
   querySearch = e => {
-    var query = e.target.value;
-    if (query.length > 4) {
+    var query = e.target.value.toLowerCase();
+    if (query.length > 2) {
       console.log("test");
       db.collection("todo-kousi")
         .get()
@@ -286,7 +286,7 @@ class Search extends React.Component {
             id: doc.id,
             ...doc.data()
           }));
-          var sr = temp.filter(li => li.name.includes(query));
+          var sr = temp.filter(li => li.name.toLowerCase().includes(query));
           this.setState({
             results: sr
           });
