@@ -79,7 +79,7 @@ body .container .row .taskpanel {
   align-items: center;
   border-bottom: 0.0625rem solid var(--input-border-color);
 }
-.topbar h5 {
+.topbar .calendar {
   display: none;
 }
 .topbar .calendarToggle {
@@ -329,10 +329,10 @@ details[open] summary {
     border-top: none;
     border-left: 0.0625rem solid var(--button-group-border-color);
   }
-  .date-large {
-    display: none;
+  .date-large h1 {
+    font-size: 32px;
   }
-  .topbar h5 {
+  .topbar .calendar {
     background: #efefef;
     padding: 8px 20px 10px;
     display: flex;

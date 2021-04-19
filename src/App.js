@@ -236,16 +236,14 @@ class App extends React.Component {
           </div>
           <div className=" taskpanel col-offset-1 col-8">
             <div className="row topbar">
-              <h4> Welcome {this.state.user == null ? "" : this.state.user}</h4>{" "}
+              <h3> Welcome {this.state.user == null ? "" : this.state.user}</h3>
               <span className=" topbar-right-section">
                 <button className="search" onClick={this.showSearchModal}>
                   <FeatherIcon icon="search" />
                 </button>
-                <h5 onClick={this.slideCalendar}>
-                  {months[newDay_.month]} {newDay_.day}
-                  <span> {newDay_.name}</span>
+                <button className="calendar" onClick={this.slideCalendar}>
                   <FeatherIcon icon="calendar" />
-                </h5>
+                </button>
               </span>
             </div>
             <div class="wrapper">
