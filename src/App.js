@@ -277,7 +277,7 @@ class Search extends React.Component {
   }
   querySearch = e => {
     var query = e.target.value;
-    if (query.length > 4) {
+    if (query.length > 2) {
       console.log("test");
       db.collection("todo-kousi")
         .get()
@@ -329,7 +329,7 @@ class Search extends React.Component {
             <input
               type="text"
               id="searchtask"
-              placeholder="Enter atleast 4 characters"
+              placeholder="Enter atleast 3 characters"
               onKeyDown={this.querySearch}
             />
             <button onClick={this.hideSearch}>Hide</button>
