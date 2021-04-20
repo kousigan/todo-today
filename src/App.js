@@ -229,8 +229,8 @@ class App extends React.Component {
 
     const user = this.state.user;
     // console.log("render: ", this.state.theList);
-    let completed = this.state.theList.filter(item => item.status == true);
-    let pending = this.state.theList.filter(item => item.status == false);
+    var completed = this.state.theList.filter(item => item.status == true);
+    var pending = this.state.theList.filter(item => item.status == false);
     return (
       <div className="container">
         {this.state.userLoaded ? "" : this.getUserId()}
@@ -259,6 +259,9 @@ class App extends React.Component {
                 today={newDay_}
                 pushData={this.submitTask}
                 user={user}
+                tasks={this.state.theList.length}
+                completed={completed.length}
+                pending={pending.length}
               />
 
               <h3>Tasks</h3>

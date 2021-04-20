@@ -23,6 +23,7 @@ class TasksPanel extends Component {
         status: false
       },
       theList: []
+      
     };
   }
 
@@ -52,6 +53,7 @@ class TasksPanel extends Component {
   };
   render() {
     var { users, searchField, theList } = this.state;
+     
     const searchResults = theList.filter(user =>
       user.name.toLowerCase().includes(searchField.toLowerCase())
     );
@@ -67,7 +69,9 @@ class TasksPanel extends Component {
                 focusedTaskId.day }
                  <span>
                 {focusedTaskId.name}</span>
-              {/* <button className="small">todo</button> */}
+                {" "}<span className="count">Total :{this.props.tasks}</span>
+                {" "}<span className="count">Completed :{this.props.completed}</span>
+                {" "}<span className="count">Pending :{this.props.pending}</span>
             </h1>
           </div>
         </div>
