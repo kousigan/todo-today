@@ -323,9 +323,10 @@ details[open] summary {
     grid-template-columns: 1fr;
   }
 
-  .controls.button-group {
+  .choose-month.button-group {
     flex-direction: row;
   }
+
   .controls.button-group button {
     border-top: none;
     border-left: 0.0625rem solid var(--button-group-border-color);

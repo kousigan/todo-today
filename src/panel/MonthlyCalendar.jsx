@@ -79,7 +79,7 @@ class MonthlyCalendar extends Component {
  <button onClick={this.toggleGrid} class="toggle-calendar-view">
             <FeatherIcon icon="list"/>
           </button>
-        <div className="button-group">
+        <div className="button-group choose-month">
           
           
           <button onClick={this.prevMonth}>
