@@ -323,7 +323,8 @@ details[open] summary {
     grid-template-columns: 1fr;
   }
 
-  .choose-month.button-group {
+  .choose-month.button-group,
+  .controls.button-group {
     flex-direction: row;
   }
 
