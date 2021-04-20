@@ -20,6 +20,7 @@ body .container .row .taskpanel {
 }
 .row.main-content {
   flex-direction: row;
+  flex-flow: nowrap;
 }
 .calendar-panel {
   background-color: #f2f2f2;
