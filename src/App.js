@@ -142,30 +142,37 @@ class App extends React.Component {
     );
   };
 
-  makeCards = data => {
+  makeCards = (data, title) => {
     // console.log("makeCards", data);
     if (data.length > 0) {
       return (
-        <div className="mytasks card-list">
-          {data.map(task => (
-            <TaskCard
-              key={task.id}
-              user={this.state.user}
-              id={task.id}
-              name={task.name}
-              status={task.status}
-              task={task}
-            />
-          ))}
-        </div>
+        <React.Fragment>
+          <h4>{title}</h4>
+          <div className="mytasks card-list">
+            {data.map(task => (
+              <TaskCard
+                key={task.id}
+                user={this.state.user}
+                id={task.id}
+                name={task.name}
+                status={task.status}
+                task={task}
+              />
+            ))}
+          </div>
+        </React.Fragment>
       );
     } else {
-      return (
-        <figure>
-          <img src={box} alt="Empty list" />
-          <figcaption>There are no items for the day.</figcaption>
-        </figure>
-      );
+      if (title == "Completed") {
+        return "";
+      } else {
+        return (
+          <figure>
+            <img src={box} alt="Empty list" />
+            <figcaption>There are no items for the day.</figcaption>
+          </figure>
+        );
+      }
     }
   };
 
@@ -222,7 +229,8 @@ class App extends React.Component {
 
     const user = this.state.user;
     // console.log("render: ", this.state.theList);
-
+    let completed = this.state.theList.filter(item => item.status == true);
+    let pending = this.state.theList.filter(item => item.status == false);
     return (
       <div className="container">
         {this.state.userLoaded ? "" : this.getUserId()}
@@ -256,7 +264,10 @@ class App extends React.Component {
               <h3>Tasks</h3>
               {this.state.loadingData
                 ? this.loadingData()
-                : this.makeCards(this.state.theList)}
+                : this.makeCards(pending, "Pending")}
+              {this.state.loadingData
+                ? ""
+                : this.makeCards(completed, "Completed")}
             </div>
           </div>
         </div>
