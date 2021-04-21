@@ -287,11 +287,15 @@ class App extends React.Component {
               click={this.slideCalendar}
             />
           </div>
-          <Notification
-            user={user}
-            slide={this.state.notificationPanel}
-            click={this.slideNotification}
-          />
+          {this.state.notificationPanel == "slide-out" ? (
+            ""
+          ) : (
+            <Notification
+              user={user}
+              slide={this.state.notificationPanel}
+              click={this.slideNotification}
+            />
+          )}
         </div>
       </div>
     );
@@ -305,7 +309,8 @@ class Notification extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: []
+      list: [],
+      listEmpty: true
     };
   }
 
@@ -313,14 +318,18 @@ class Notification extends React.Component {
     this.props.click();
   };
   updateList = data => {
-    this.setState({
-      list: data
+    return this.setState({
+      list: data,
+      listEmpty: false
     });
   };
   makelist = () => {
-    if (this.props.slide == "slide-in") {
+    var sortList = [];
+
+    if (this.props.slide == "slide-in" && this.state.listEmpty) {
       console.log(this.state.list);
       db.collection("todo-" + this.props.user)
+        .where("status", "==", false)
         .get()
         .then(snapshot => {
           var items = snapshot.docs.map(doc => ({
@@ -331,16 +340,16 @@ class Notification extends React.Component {
           console.log(items);
           this.updateList(items);
         });
-      return (
-        <React.Fragment>
-          <div>
-            {this.state.list.map((item, i) => (
-              <div key={i}> {item.name}</div>
-            ))}
-          </div>
-        </React.Fragment>
-      );
     }
+    return (
+      <React.Fragment>
+        <div>
+          {this.state.list.map((item, i) => (
+            <div key={i}> {item.name}</div>
+          ))}
+        </div>
+      </React.Fragment>
+    );
   };
   pullPendingItems = () => {
     var user = this.props.user;
