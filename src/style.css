@@ -81,7 +81,7 @@ body .container .row .taskpanel {
   border-bottom: 0.0625rem solid var(--input-border-color);
 }
 .topbar .calendar {
-  display: none;
+  /* display: none; */
 }
 .topbar .calendarToggle {
   margin-left: 1px;
@@ -92,6 +92,7 @@ body .container .row .taskpanel {
 }
 .topbar-right-section button {
   background: none;
+  line-height: 0;
 }
 textarea {
   width: 100%;
@@ -103,17 +104,7 @@ h1 button.small {
   float: right;
   margin: 0;
 }
-.date-large h1 {
-  font-weight: bold;
-  color: #b6b8ca;
-  font-family: Antonio;
-  font-size: 48px;
-}
-.date-large h1 span {
-  font-family: Antonio;
-  padding: 0 0 0 10px;
-  color: #dcdde8;
-}
+
 .mytasks.card-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -335,7 +326,7 @@ details[open] summary {
   .date-large h1 {
     font-size: 32px;
   }
-  .topbar .calendar {
+  /* .topbar .calendar {
     background: #efefef;
     padding: 8px 20px 10px;
     display: flex;
@@ -343,7 +334,7 @@ details[open] summary {
     border-radius: 20px;
     align-items: center;
     cursor: pointer;
-  }
+  } */
 }
 
 /* search */

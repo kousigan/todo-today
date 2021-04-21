@@ -240,6 +240,7 @@ class App extends React.Component {
             <MonthlyCalendar
               fixDate={this.handleDate}
               slide={this.state.slide}
+              click={this.slideCalendar}
             />
           </div>
           <div className=" taskpanel col-offset-1 col-8">

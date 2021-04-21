@@ -25,7 +25,23 @@
   width: 100%;
   margin: 0 0 10px 0;
 }
+.date-large h1 .count {
+  font-size: 32px;
+}
 .date-large h1 span.count:hover {
   color: #b6b8ca;
   transition: 0.2s color ease-in;
+}
+.date-large h1 * {
+  font-family: Antonio;
+}
+.date-large h1 {
+  font-weight: bold;
+  color: #b6b8ca;
+  font-size: 32px;
+}
+.date-large h1 span {
+  font-family: Antonio;
+  padding: 0 0 0 10px;
+  color: #dcdde8;
 }

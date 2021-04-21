@@ -24,8 +24,13 @@
   border-color: rgb(85, 91, 110) !important;
   line-height: 1;
   font-family: Antonio;
+  width: 50%;
 }
-.toggle-calendar-view {
+.toggle-controls {
+  justify-content: end;
+  display: flex;
+}
+.toggle-controls button {
   line-height: 0;
 }
 .fmonth small {

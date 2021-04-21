@@ -64,14 +64,15 @@ class TasksPanel extends Component {
         <div className="row date-large">
           <div className="col-lg">
             <h1>
-              {months[focusedTaskId.month] +
+
+             <a> {months[focusedTaskId.month] +
                 " " +
-                focusedTaskId.day }
+                focusedTaskId.day }</a>
                  <span>
-                {focusedTaskId.name}</span>
-                {" "}<span className="count">Total :{this.props.tasks}</span>
-                {" "}<span className="count">Completed :{this.props.completed}</span>
-                {" "}<span className="count">Pending :{this.props.pending}</span>
+                {focusedTaskId.name}</span>{" "}
+                <span className="count">Total:{this.props.tasks}</span>{" "}
+                <span className="count">Completed:{this.props.completed}</span>{" "}
+                <span className="count">Pending:{this.props.pending}</span>
             </h1>
           </div>
         </div>

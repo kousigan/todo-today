@@ -72,13 +72,20 @@ class MonthlyCalendar extends Component {
   setDay = e => {
     this.props.fixDate(e.target);
   };
- 
+ closeCalendar=()=>{
+   this.props.click();
+ }
   render() {
     return (
       <div  >
- <button onClick={this.toggleGrid} class="toggle-calendar-view">
+      <div className="toggle-controls">
+ <button onClick={this.toggleGrid} className="toggle-calendar-view">
             <FeatherIcon icon="list"/>
           </button>
+          <button onClick={this.closeCalendar} className="close-calendar">
+            <FeatherIcon icon="x"/>
+          </button>
+          </div>
         <div className="button-group choose-month">
           
           
