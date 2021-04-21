@@ -26,13 +26,7 @@
   font-family: Antonio;
   width: 50%;
 }
-.toggle-controls {
-  justify-content: flex-end;
-  display: flex;
-}
-.toggle-controls button {
-  line-height: 0;
-}
+
 .fmonth small {
   color: rgba(85, 91, 110, 0.7);
 }

@@ -38,8 +38,8 @@ class App extends React.Component {
       user: null,
       userLoaded: false,
       showerror: false,
-      slide: "slide-in",
-      notificationPanel: "slide-in",
+      slide: "slide-out",
+      notificationPanel: "slide-out",
       search: false
     };
   }
@@ -70,16 +70,15 @@ class App extends React.Component {
   };
   getData = user => {
     var temp = user;
-
     db.collection("todo-" + temp)
       .where("date.day", "==", parseInt(this.state.fdate.day))
       .where("date.month", "==", parseInt(this.state.fdate.month))
       .onSnapshot(snapshot => {
-        temp = snapshot.docs.map(doc => ({
+        var items = snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
-        this.makeUpdate(temp);
+        this.makeUpdate(items);
       });
   };
   makeUpdate = temp => {
@@ -250,7 +249,10 @@ class App extends React.Component {
                 <button className="search" onClick={this.showSearchModal}>
                   <FeatherIcon icon="search" />
                 </button>
-                <button className="notification">
+                <button
+                  className="notification"
+                  onClick={this.slideNotification}
+                >
                   <FeatherIcon icon="bell" />
                 </button>
                 <button className="calendar" onClick={this.slideCalendar}>
@@ -258,7 +260,7 @@ class App extends React.Component {
                 </button>
               </span>
             </div>
-            <div class="wrapper">
+            <div className="wrapper">
               <TaskPanel
                 today={newDay_}
                 pushData={this.submitTask}
@@ -286,6 +288,7 @@ class App extends React.Component {
             />
           </div>
           <Notification
+            user={user}
             slide={this.state.notificationPanel}
             click={this.slideNotification}
           />
@@ -301,22 +304,90 @@ export default App;
 class Notification extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      list: []
+    };
   }
 
   togglePanel = () => {
     this.props.click();
   };
+  updateList = data => {
+    this.setState({
+      list: data
+    });
+  };
+  makelist = () => {
+    if (this.props.slide == "slide-in") {
+      console.log(this.state.list);
+      db.collection("todo-" + this.props.user)
+        .get()
+        .then(snapshot => {
+          var items = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
 
+          console.log(items);
+          this.updateList(items);
+        });
+      return (
+        <React.Fragment>
+          <div>
+            {this.state.list.map((item, i) => (
+              <div key={i}> {item.name}</div>
+            ))}
+          </div>
+        </React.Fragment>
+      );
+    }
+  };
+  pullPendingItems = () => {
+    var user = this.props.user;
+    var items = [];
+    db.collection("todo-" + user)
+      .get()
+      .then(snapshot => {
+        items = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        this.setState({ list: items });
+        //   return <span>{item.name}</span>;
+        // return (
+        //   <React.Fragment>
+        //     <details>
+        //       <summary>
+        //         {" "}
+        //         months[{item.month}] {item.day}
+        //         <span className="badge">3 pending</span>
+        //       </summary>
+        //       <ul>
+        //         <li>
+        //           {" "}
+        //           <div>
+        //             {" "}
+        //             <FeatherIcon icon="clock" />
+        //           </div>
+        //         </li>
+        //       </ul>
+        //     </details>
+        //   </React.Fragment>
+        // );
+        // });
+      });
+  };
   render() {
+    // this.pullPendingItems();
     return (
       <div className={`notification-panel ${this.props.slide}`}>
-        <h3>
-          Notification
+        <div className="toggle-controls">
+          <span className="title">Notification</span>
           <button onClick={this.togglePanel}>
             <FeatherIcon icon="x" />
           </button>
-        </h3>
+        </div>
+        {this.makelist()}
       </div>
     );
   }
@@ -378,7 +449,7 @@ class Search extends React.Component {
     return (
       <div className="overlay-container getModal">
         <div className="card getSearchResults">
-          <h3 class="section">Search tasks</h3>
+          <h3 className="section">Search tasks</h3>
           <div className="section input">
             <input
               type="text"

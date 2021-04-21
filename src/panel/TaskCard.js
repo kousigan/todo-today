@@ -127,7 +127,7 @@ class TaskCard extends React.Component {
           data-user={this.props.user}
           data-key={this.props.id}
         >
-          <button class="status-indicator">
+          <button className="status-indicator">
             {" "}
             <FeatherIcon icon="check" />
           </button>

@@ -57,6 +57,7 @@ body .container .row .taskpanel {
   position: absolute;
   z-index: 11;
   right: 0;
+  padding: 0 4px;
 }
 
 @keyframes slidingIn {
@@ -272,6 +273,21 @@ figcaption {
 .controls button:hover span {
   display: unset;
   transition: all 0.3s ease-in 1s;
+}
+.toggle-controls {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  background: #e2e2e2;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+.toggle-controls .title {
+  padding-left: 15px;
+  font: 500 22px "Segoe UI";
+}
+.toggle-controls button {
+  line-height: 0;
 }
 .button-group.controls {
   border: 0px solid #e5e5e5;
