@@ -44,9 +44,21 @@ body .container .row .taskpanel {
   position: absolute;
   z-index: 11;
 }
-
-.monthly-calendar.slide-out {
+.notification-panel {
+  width: 300px;
+  max-width: 300px;
+  background-color: #f2f2f2;
+  height: auto;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  min-width: 300px;
+  border-left: 0.0625rem solid var(--input-border-color);
+  position: absolute;
+  z-index: 11;
+  right: 0;
 }
+
 @keyframes slidingIn {
   from {
     right: -300px;
@@ -69,6 +81,7 @@ body .container .row .taskpanel {
     box-shadow: -40px 4px 48px rgba(0 0 0/0);
   }
 }
+.notification-panel.slide-out,
 .monthly-calendar.slide-out {
   right: -300px;
   animation: slidingOut 0.5s;
@@ -77,6 +90,7 @@ body .container .row .taskpanel {
   right: 1px;
   z-index: -1;
 }
+.notification-panel.slide-in,
 .monthly-calendar.slide-in {
   animation-name: slidingIn;
   animation-duration: 1s;

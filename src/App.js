@@ -38,7 +38,8 @@ class App extends React.Component {
       user: null,
       userLoaded: false,
       showerror: false,
-      slide: "slide-out",
+      slide: "slide-in",
+      notificationPanel: "slide-in",
       search: false
     };
   }
@@ -208,6 +209,12 @@ class App extends React.Component {
       slide: this.state.slide == "slide-out" ? "slide-in" : "slide-out"
     });
   };
+  slideNotification = () => {
+    this.setState({
+      notificationPanel:
+        this.state.notificationPanel == "slide-out" ? "slide-in" : "slide-out"
+    });
+  };
   showHideSearch = () => {
     this.setState({
       search: false
@@ -243,6 +250,9 @@ class App extends React.Component {
                 <button className="search" onClick={this.showSearchModal}>
                   <FeatherIcon icon="search" />
                 </button>
+                <button className="notification">
+                  <FeatherIcon icon="bell" />
+                </button>
                 <button className="calendar" onClick={this.slideCalendar}>
                   <FeatherIcon icon="calendar" />
                 </button>
@@ -275,6 +285,10 @@ class App extends React.Component {
               click={this.slideCalendar}
             />
           </div>
+          <Notification
+            slide={this.state.notificationPanel}
+            click={this.slideNotification}
+          />
         </div>
       </div>
     );
@@ -283,6 +297,30 @@ class App extends React.Component {
 //             <TaskPanel today={newDay_} tasks={taskList} />
 
 export default App;
+
+class Notification extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  togglePanel = () => {
+    this.props.click();
+  };
+
+  render() {
+    return (
+      <div className={`notification-panel ${this.props.slide}`}>
+        <h3>
+          Notification
+          <button onClick={this.togglePanel}>
+            <FeatherIcon icon="x" />
+          </button>
+        </h3>
+      </div>
+    );
+  }
+}
 
 class Search extends React.Component {
   constructor(props) {

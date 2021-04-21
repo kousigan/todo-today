@@ -1,9 +1,5 @@
 import React from "react";
-import { days, months } from "./names";
 import { db } from "../db/config";
-import { nanoid } from "nanoid";
-import box from "./img/box.svg";
-import delivery from "./img/delivery.svg";
 import FeatherIcon from "feather-icons-react";
 import "../style.css";
 
