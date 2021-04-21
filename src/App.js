@@ -236,16 +236,9 @@ class App extends React.Component {
         {this.state.userLoaded ? "" : this.getUserId()}
         {this.state.search ? this.searchTask() : ""}
         <div className="row main-content">
-          <div className={`col-sm monthly-calendar ${this.state.slide}`}>
-            <MonthlyCalendar
-              fixDate={this.handleDate}
-              slide={this.state.slide}
-              click={this.slideCalendar}
-            />
-          </div>
           <div className=" taskpanel col-offset-1 col-8">
             <div className="row topbar">
-              <h3> Welcome {this.state.user == null ? "" : this.state.user}</h3>
+              <h3>{this.state.user == null ? "" : this.state.user}-todo</h3>
               <span className=" topbar-right-section">
                 <button className="search" onClick={this.showSearchModal}>
                   <FeatherIcon icon="search" />
@@ -263,6 +256,7 @@ class App extends React.Component {
                 tasks={this.state.theList.length}
                 completed={completed.length}
                 pending={pending.length}
+                click={this.slideCalendar}
               />
 
               <h3>Tasks</h3>
@@ -273,6 +267,13 @@ class App extends React.Component {
                 ? ""
                 : this.makeCards(completed, "Completed")}
             </div>
+          </div>
+          <div className={`col-sm monthly-calendar ${this.state.slide}`}>
+            <MonthlyCalendar
+              fixDate={this.handleDate}
+              slide={this.state.slide}
+              click={this.slideCalendar}
+            />
           </div>
         </div>
       </div>

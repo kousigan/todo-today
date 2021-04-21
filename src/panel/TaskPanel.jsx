@@ -51,6 +51,9 @@ class TasksPanel extends Component {
   pushToParent = e => {
     this.props.pushData(e);
   };
+   toggleCalendar=()=>{
+   this.props.click();
+ }
   render() {
     var { users, searchField, theList } = this.state;
      
@@ -65,7 +68,7 @@ class TasksPanel extends Component {
           <div className="col-lg">
             <h1>
 
-             <a> {months[focusedTaskId.month] +
+             <a onClick={this.toggleCalendar}> {months[focusedTaskId.month] +
                 " " +
                 focusedTaskId.day }</a>
                  <span>

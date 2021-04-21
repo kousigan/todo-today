@@ -6,6 +6,7 @@ body {
 #root,
 body .container {
   padding: 0;
+  background: #f3f3f3;
 }
 body .container .row .taskpanel {
   max-height: 100vh;
@@ -17,6 +18,9 @@ body .container .row .taskpanel {
 }
 .wrapper {
   padding: 0 5%;
+
+  max-width: 1000px;
+  margin: 0 auto;
 }
 .row.main-content {
   flex-direction: row;
@@ -34,41 +38,47 @@ body .container .row .taskpanel {
   overflow: auto;
   min-width: 300px;
   border-right: 0.0625rem solid var(--input-border-color);
-}
-.monthly-calendar.slide-in {
   position: absolute;
-  left: -300px;
   z-index: 11;
+}
+
+.monthly-calendar.slide-out {
 }
 @keyframes slidingIn {
   from {
-    left: 0;
+    right: -300px;
+    box-shadow: -40px 4px 48px rgba(0 0 0/0);
   }
   to {
-    left: -300px;
+    right: 0;
+    box-shadow: -40px 4px 48px rgba(0 0 0/0.1);
   }
 }
 @keyframes slidingOut {
   from {
-    left: -300px;
+    right: 0;
+    box-shadow: -40px 4px 48px rgba(0 0 0/0.1);
   }
   to {
-    left: 0;
+    right: -300px;
+    box-shadow: -40px 4px 48px rgba(0 0 0/0);
   }
 }
 .monthly-calendar.slide-out {
+  right: -300px;
   animation: slidingOut 0.5s;
+  box-shadow: none;
+  box-shadow: -40px 4px 48px rgba(0 0 0/0);
 }
 .monthly-calendar.slide-in {
   animation-name: slidingIn;
   animation-duration: 1s;
-  box-shadow: 0 0 0 transparent;
-
-  transition: box-shadow 0.1s linear 0.9s;
+  right: 0px;
+  box-shadow: -40px 4px 48px rgba(0 0 0/0.1);
 }
 @media screen and (min-width: 768px) {
   .monthly-calendar.slide-in {
-    position: inherit;
+    /* position: inherit; */
   }
 }
 .topbar {
@@ -80,8 +90,8 @@ body .container .row .taskpanel {
   align-items: center;
   border-bottom: 0.0625rem solid var(--input-border-color);
 }
-.topbar .calendar {
-  /* display: none; */
+.topbar h3 {
+  padding-left: 1rem;
 }
 .topbar .calendarToggle {
   margin-left: 1px;
@@ -154,7 +164,7 @@ h1 button.small {
   top: 0;
   bottom: 0;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
+  /* background: rgba(0, 0, 0, 0.5); */
 }
 .getModal + .main-content {
   filter: blur(10px);
