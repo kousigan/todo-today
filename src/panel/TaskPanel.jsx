@@ -67,15 +67,18 @@ class TasksPanel extends Component {
         <div className="row date-large">
           <div className="col-lg">
             <h1>
+            <span className="date">
 
              <a onClick={this.toggleCalendar}> {months[focusedTaskId.month] +
                 " " +
                 focusedTaskId.day }</a>
-                 <span>
-                {focusedTaskId.name}</span>{" "}
+                 <span className="dayname">
+                {focusedTaskId.name}</span></span>
+                <span className="task-details">
                 <span className="count">Total:{this.props.tasks}</span>{" "}
                 <span className="count">Completed:{this.props.completed}</span>{" "}
                 <span className="count">Pending:{this.props.pending}</span>
+                </span>
             </h1>
           </div>
         </div>

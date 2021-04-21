@@ -25,10 +25,11 @@
   width: 100%;
   margin: 0 0 10px 0;
 }
-.date-large h1 .count {
+.date-large h1 .task-details .count {
   font-size: 32px;
+  color: #dcdde8;
 }
-.date-large h1 span.count:hover {
+.date-large h1 .task-details .count:hover {
   color: #b6b8ca;
   transition: 0.2s color ease-in;
 }
@@ -39,9 +40,17 @@
   font-weight: bold;
   color: #b6b8ca;
   font-size: 32px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-.date-large h1 span {
+.date-large h1 .dayname {
   font-family: Antonio;
   padding: 0 0 0 10px;
   color: #dcdde8;
+}
+@media screen and (max-width: 480px) {
+  .date-large h1 .task-details .count {
+    font-size: 24px;
+  }
 }

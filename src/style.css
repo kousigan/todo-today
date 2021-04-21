@@ -2,11 +2,11 @@ html,
 body {
   height: 100%;
   color: #555b6e;
+  background: #f3f3f3;
 }
 #root,
 body .container {
   padding: 0;
-  background: #f3f3f3;
 }
 body .container .row .taskpanel {
   max-height: 100vh;
@@ -15,6 +15,7 @@ body .container .row .taskpanel {
   margin: 0 auto;
   padding: 0;
   flex-grow: 1;
+  background: #f2f2f2;
 }
 .wrapper {
   padding: 0 5%;
@@ -34,10 +35,12 @@ body .container .row .taskpanel {
   width: 300px;
   max-width: 300px;
   background-color: #f2f2f2;
-  height: 100vh;
+  height: auto;
+  top: 0;
+  bottom: 0;
   overflow: auto;
   min-width: 300px;
-  border-right: 0.0625rem solid var(--input-border-color);
+  border-left: 0.0625rem solid var(--input-border-color);
   position: absolute;
   z-index: 11;
 }
@@ -50,17 +53,19 @@ body .container .row .taskpanel {
     box-shadow: -40px 4px 48px rgba(0 0 0/0);
   }
   to {
-    right: 0;
+    right: 1px;
     box-shadow: -40px 4px 48px rgba(0 0 0/0.1);
   }
 }
 @keyframes slidingOut {
   from {
-    right: 0;
+    right: 1px;
+    z-index: 11;
     box-shadow: -40px 4px 48px rgba(0 0 0/0.1);
   }
   to {
     right: -300px;
+    z-index: 11;
     box-shadow: -40px 4px 48px rgba(0 0 0/0);
   }
 }
@@ -69,6 +74,8 @@ body .container .row .taskpanel {
   animation: slidingOut 0.5s;
   box-shadow: none;
   box-shadow: -40px 4px 48px rgba(0 0 0/0);
+  right: 1px;
+  z-index: -1;
 }
 .monthly-calendar.slide-in {
   animation-name: slidingIn;
@@ -85,7 +92,7 @@ body .container .row .taskpanel {
   justify-content: space-between;
   position: sticky;
   top: 0;
-  background: #f8f8f8;
+  background: #ffffff;
   z-index: 10;
   align-items: center;
   border-bottom: 0.0625rem solid var(--input-border-color);
