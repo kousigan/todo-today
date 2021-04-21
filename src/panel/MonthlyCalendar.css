@@ -27,7 +27,7 @@
   width: 50%;
 }
 .toggle-controls {
-  justify-content: end;
+  justify-content: flex-end;
   display: flex;
 }
 .toggle-controls button {

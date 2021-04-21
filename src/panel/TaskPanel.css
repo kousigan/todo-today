@@ -26,31 +26,39 @@
   margin: 0 0 10px 0;
 }
 .date-large h1 .task-details .count {
-  font-size: 32px;
-  color: #dcdde8;
+  color: #b1b7c9;
 }
 .date-large h1 .task-details .count:hover {
-  color: #b6b8ca;
+  color: inherit;
   transition: 0.2s color ease-in;
 }
 .date-large h1 * {
   font-family: Antonio;
+  font-size: 48px;
 }
 .date-large h1 {
   font-weight: bold;
-  color: #b6b8ca;
-  font-size: 32px;
+  color: #555b6e;
+
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.date-large h1 .date {
+  cursor: pointer;
+}
 .date-large h1 .dayname {
   font-family: Antonio;
   padding: 0 0 0 10px;
-  color: #dcdde8;
+  color: #b1b7c9;
+}
+@media screen and (max-width: 1020px) {
+  .date-large h1 * {
+    font-size: 32px;
+  }
 }
 @media screen and (max-width: 480px) {
-  .date-large h1 .task-details .count {
+  .date-large h1 * {
     font-size: 24px;
   }
 }
