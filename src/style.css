@@ -150,7 +150,8 @@ h1 button.small {
   max-width: unset;
   align-self: flex-start;
   margin: 0;
-  border-radius: 8px;
+  border-radius: 0px;
+  border-width: 0 0 0 4px;
 }
 .mytasks .card .section {
   display: flex;
@@ -436,6 +437,12 @@ button.search {
 .notification-panel .card {
   border-radius: 0;
   border: none;
+  border-left: 4px solid #f2f2f2;
+  margin-left: -4px;
+}
+.notification-panel .card:hover {
+  border-color: tomato;
+  background: #ff634712;
 }
 .notification-panel .card .section {
   align-items: center;
@@ -444,6 +451,7 @@ button.search {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  background-color: transparent;
 }
 .notification-panel .card .section:last-of-type {
   padding-top: 0;
