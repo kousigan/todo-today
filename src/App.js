@@ -7,6 +7,7 @@ import { days, months } from "./panel/names";
 import { db } from "./db/config";
 import { nanoid } from "nanoid";
 import box from "./img/box.svg";
+import logo from "./img/logo.svg";
 import delivery from "./img/delivery.svg";
 import FeatherIcon from "feather-icons-react";
 import { sortBy, groupBy } from "underscore";
@@ -119,6 +120,7 @@ class App extends React.Component {
     return (
       <div className="overlay-container getModal">
         <div className="card getusername">
+          <img src={logo} className="logo" alt="My todo" />
           <h3 className="section">Who's this?</h3>
           <label htmlFor="username">Enter a name</label>
           <input
@@ -245,7 +247,10 @@ class App extends React.Component {
         <div className="row main-content">
           <div className=" taskpanel col-offset-1 col-8">
             <div className="row topbar">
-              <h3>{this.state.user == null ? "" : this.state.user}-todo</h3>
+              <span className=" topbar-right-section">
+                <img src={logo} className="logo" alt="My todo" />
+                <h3>{this.state.user == null ? "" : this.state.user}-todo</h3>
+              </span>
               <span className=" topbar-right-section">
                 <button className="search" onClick={this.showSearchModal}>
                   <FeatherIcon icon="search" />

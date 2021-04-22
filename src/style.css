@@ -17,6 +17,10 @@ body .container .row .taskpanel {
   flex-grow: 1;
   background: #f2f2f2;
 }
+.logo {
+  height: 50px;
+  align-self: flex-start;
+}
 .wrapper {
   padding: 0 5% 100px;
   max-width: 1000px;
@@ -201,7 +205,7 @@ h1 button.small {
 }
 .card h3.section {
   border: 0;
-  padding: 10px 8px 40px;
+  padding: 20px 8px 20px;
   font-size: 32px;
   font-weight: bold;
   color: #b6b8ca;
