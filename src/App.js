@@ -281,13 +281,17 @@ class App extends React.Component {
                 : this.makeCards(completed, "Completed")}
             </div>
           </div>
-          <div className={`col-sm monthly-calendar ${this.state.slide}`}>
-            <MonthlyCalendar
-              fixDate={this.handleDate}
-              slide={this.state.slide}
-              click={this.slideCalendar}
-            />
-          </div>
+          {this.state.slide == "slide-out" ? (
+            ""
+          ) : (
+            <div className={`col-sm monthly-calendar ${this.state.slide}`}>
+              <MonthlyCalendar
+                fixDate={this.handleDate}
+                slide={this.state.slide}
+                click={this.slideCalendar}
+              />
+            </div>
+          )}
           {this.state.notificationPanel == "slide-out" ? (
             ""
           ) : (
