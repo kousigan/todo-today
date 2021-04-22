@@ -18,8 +18,7 @@ body .container .row .taskpanel {
   background: #f2f2f2;
 }
 .wrapper {
-  padding: 0 5%;
-
+  padding: 0 5% 100px;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -288,7 +287,8 @@ figcaption {
 }
 .toggle-controls .title {
   padding-left: 15px;
-  font: 500 22px "Segoe UI";
+  font: 500 22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", Helvetica, sans-serif;
 }
 .toggle-controls button {
   line-height: 0;
