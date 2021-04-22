@@ -9,6 +9,7 @@ import { nanoid } from "nanoid";
 import box from "./img/box.svg";
 import delivery from "./img/delivery.svg";
 import FeatherIcon from "feather-icons-react";
+import { sortBy, groupBy } from "underscore";
 import "./style.css";
 
 class App extends React.Component {
@@ -292,6 +293,7 @@ class App extends React.Component {
           ) : (
             <Notification
               user={user}
+              select={this.selectDate}
               slide={this.state.notificationPanel}
               click={this.slideNotification}
             />
@@ -318,16 +320,40 @@ class Notification extends React.Component {
     this.props.click();
   };
   updateList = data => {
-    return this.setState({
-      list: data,
-      listEmpty: false
-    });
+    if (data !== null) {
+      var temp = [];
+      var newList = [];
+      data.forEach(item => {
+        temp.push({
+          month: item.date.month,
+          day: item.date.day,
+          dayname: item.date.name,
+          year: item.date.year,
+          name: item.name
+        });
+      });
+      temp = groupBy(temp, "month");
+      for (var key in temp) {
+        let tmp = sortBy(temp[key], "day");
+        tmp.forEach(it => {
+          newList.push(it);
+        });
+      }
+
+      // console.log(newList);
+      return this.setState({
+        list: newList,
+        listEmpty: false
+      });
+    }
+  };
+  chooseDate = e => {
+    this.props.select(e.target);
   };
   makelist = () => {
-    var sortList = [];
-
     if (this.props.slide == "slide-in" && this.state.listEmpty) {
-      console.log(this.state.list);
+      // console.log("updateList function");
+      // console.log(this.state.list);
       db.collection("todo-" + this.props.user)
         .where("status", "==", false)
         .get()
@@ -336,8 +362,6 @@ class Notification extends React.Component {
             id: doc.id,
             ...doc.data()
           }));
-
-          console.log(items);
           this.updateList(items);
         });
     }
@@ -345,49 +369,36 @@ class Notification extends React.Component {
       <React.Fragment>
         <div>
           {this.state.list.map((item, i) => (
-            <div key={i}> {item.name}</div>
+            <div className="card" key={i}>
+              {" "}
+              <div
+                className="section"
+                data-day={item.day}
+                data-month={item.month}
+                data-year={item.year}
+                data-dayname={item.dayname}
+                onClick={this.chooseDate}
+              >
+                <span className="icon">
+                  {" "}
+                  <FeatherIcon icon="clock" />
+                </span>{" "}
+                {item.name}
+              </div>
+              <div className="section">
+                <small>
+                  {" "}
+                  {months[item.month]}, {item.day}, {item.year}
+                </small>
+              </div>{" "}
+            </div>
           ))}
         </div>
       </React.Fragment>
     );
   };
-  pullPendingItems = () => {
-    var user = this.props.user;
-    var items = [];
-    db.collection("todo-" + user)
-      .get()
-      .then(snapshot => {
-        items = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        this.setState({ list: items });
-        //   return <span>{item.name}</span>;
-        // return (
-        //   <React.Fragment>
-        //     <details>
-        //       <summary>
-        //         {" "}
-        //         months[{item.month}] {item.day}
-        //         <span className="badge">3 pending</span>
-        //       </summary>
-        //       <ul>
-        //         <li>
-        //           {" "}
-        //           <div>
-        //             {" "}
-        //             <FeatherIcon icon="clock" />
-        //           </div>
-        //         </li>
-        //       </ul>
-        //     </details>
-        //   </React.Fragment>
-        // );
-        // });
-      });
-  };
+
   render() {
-    // this.pullPendingItems();
     return (
       <div className={`notification-panel ${this.props.slide}`}>
         <div className="toggle-controls">
@@ -412,7 +423,7 @@ class Search extends React.Component {
   querySearch = e => {
     var query = e.target.value.toLowerCase();
     if (query.length > 2) {
-      console.log("test");
+      // console.log("test");
       db.collection("todo-kousi")
         .get()
         .then(snapshot => {
@@ -438,7 +449,7 @@ class Search extends React.Component {
     this.props.select(e.target);
   };
   render() {
-    console.log("render", this.state.results);
+    // console.log("render", this.state.results);
     const { results } = this.state;
     var listItems = results.map((item, i) => (
       <div className="section resultItem" key={i}>

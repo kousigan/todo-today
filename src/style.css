@@ -281,6 +281,10 @@ figcaption {
   background: #e2e2e2;
   margin-left: -4px;
   margin-right: -4px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 10;
 }
 .toggle-controls .title {
   padding-left: 15px;
@@ -422,4 +426,31 @@ button.search {
 .section.resultItem:hover {
   white-space: normal;
   text-overflow: unset;
+}
+
+.notification-panel .card {
+  border-radius: 0;
+  border: none;
+  border-bottom: 0.625rem solid #ccc;
+}
+.notification-panel .card {
+  border-radius: 0;
+  border: none;
+}
+.notification-panel .card .section {
+  align-items: center;
+  display: flex;
+  border: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.notification-panel .card .section:last-of-type {
+  padding-top: 0;
+  text-indent: 33px;
+}
+.notification-panel .card .section .icon {
+  padding-right: 10px;
+  color: darkgoldenrod;
+  line-height: 0;
 }
