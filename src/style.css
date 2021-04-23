@@ -139,7 +139,10 @@ h1 button.small {
   float: right;
   margin: 0;
 }
-
+.task-container {
+}
+.task-container .taskcolumn {
+}
 .mytasks.card-list {
   display: grid;
   grid-template-columns: 1fr 1fr;

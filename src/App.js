@@ -1,6 +1,7 @@
 import React from "react";
 import MonthlyCalendar from "./panel/MonthlyCalendar";
-import NotesPanel from "./panel/NotesPanel";
+import Notification from "./panel/Notification";
+import Search from "./panel/Search";
 import TaskPanel from "./panel/TaskPanel";
 import TaskCard from "./panel/TaskCard";
 import { days, months } from "./panel/names";
@@ -149,7 +150,7 @@ class App extends React.Component {
     // console.log("makeCards", data);
     if (data.length > 0) {
       return (
-        <React.Fragment>
+        <div className={`taskcolumn ${title}`}>
           <h4>{title}</h4>
           <div className="mytasks card-list">
             {data.map(task => (
@@ -163,17 +164,19 @@ class App extends React.Component {
               />
             ))}
           </div>
-        </React.Fragment>
+        </div>
       );
     } else {
       if (title == "Completed") {
         return "";
       } else {
         return (
-          <figure>
-            <img src={box} alt="Empty list" />
-            <figcaption>There are no items for the day.</figcaption>
-          </figure>
+          <div className="taskcolumn">
+            <figure>
+              <img src={box} alt="Empty list" />
+              <figcaption>There are no items for the day.</figcaption>
+            </figure>
+          </div>
         );
       }
     }
@@ -278,12 +281,14 @@ class App extends React.Component {
               />
 
               <h3>Tasks</h3>
-              {this.state.loadingData
-                ? this.loadingData()
-                : this.makeCards(pending, "Pending")}
-              {this.state.loadingData
-                ? ""
-                : this.makeCards(completed, "Completed")}
+              <div className="task-container">
+                {this.state.loadingData
+                  ? this.loadingData()
+                  : this.makeCards(pending, "Pending")}
+                {this.state.loadingData
+                  ? ""
+                  : this.makeCards(completed, "Completed")}
+              </div>
             </div>
           </div>
           {this.state.slide == "slide-out" ? (
@@ -315,182 +320,3 @@ class App extends React.Component {
 //             <TaskPanel today={newDay_} tasks={taskList} />
 
 export default App;
-
-class Notification extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [],
-      listEmpty: true
-    };
-  }
-
-  togglePanel = () => {
-    this.props.click();
-  };
-  updateList = data => {
-    if (data !== null) {
-      var temp = [];
-      var newList = [];
-      data.forEach(item => {
-        temp.push({
-          month: item.date.month,
-          day: item.date.day,
-          dayname: item.date.name,
-          year: item.date.year,
-          name: item.name
-        });
-      });
-      temp = groupBy(temp, "month");
-      for (var key in temp) {
-        let tmp = sortBy(temp[key], "day");
-        tmp.forEach(it => {
-          newList.push(it);
-        });
-      }
-
-      // console.log(newList);
-      return this.setState({
-        list: newList,
-        listEmpty: false
-      });
-    }
-  };
-  chooseDate = e => {
-    this.props.select(e.target);
-  };
-  makelist = () => {
-    if (this.props.slide == "slide-in" && this.state.listEmpty) {
-      // console.log("updateList function");
-      // console.log(this.state.list);
-      db.collection("todo-" + this.props.user)
-        .where("status", "==", false)
-        .get()
-        .then(snapshot => {
-          var items = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-          }));
-          this.updateList(items);
-        });
-    }
-    return (
-      <React.Fragment>
-        <div>
-          {this.state.list.map((item, i) => (
-            <div className="card" key={i}>
-              {" "}
-              <div
-                className="section"
-                data-day={item.day}
-                data-month={item.month}
-                data-year={item.year}
-                data-dayname={item.dayname}
-                onClick={this.chooseDate}
-              >
-                <span className="icon">
-                  {" "}
-                  <FeatherIcon icon="clock" />
-                </span>{" "}
-                {item.name}
-              </div>
-              <div className="section">
-                <small>
-                  {" "}
-                  {months[item.month]}, {item.day}, {item.year}
-                </small>
-              </div>{" "}
-            </div>
-          ))}
-        </div>
-      </React.Fragment>
-    );
-  };
-
-  render() {
-    return (
-      <div className={`notification-panel ${this.props.slide}`}>
-        <div className="toggle-controls">
-          <span className="title">Notification</span>
-          <button onClick={this.togglePanel}>
-            <FeatherIcon icon="x" />
-          </button>
-        </div>
-        {this.makelist()}
-      </div>
-    );
-  }
-}
-
-class Search extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      results: []
-    };
-  }
-  querySearch = e => {
-    var query = e.target.value.toLowerCase();
-    if (query.length > 2) {
-      // console.log("test");
-      db.collection("todo-kousi")
-        .get()
-        .then(snapshot => {
-          const temp = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-          }));
-          var sr = temp.filter(li => li.name.toLowerCase().includes(query));
-          this.setState({
-            results: sr
-          });
-        });
-    }
-  };
-  checkDuplicate = (arr, item) => {
-    var temp = arr.some(li => li.id == item.id);
-    return temp;
-  };
-  hideSearch = () => {
-    this.props.hide(false);
-  };
-  chooseDate = e => {
-    this.props.select(e.target);
-  };
-  render() {
-    // console.log("render", this.state.results);
-    const { results } = this.state;
-    var listItems = results.map((item, i) => (
-      <div className="section resultItem" key={i}>
-        <button
-          data-day={item.date.day}
-          data-month={item.date.month}
-          data-year={item.date.year}
-          data-dayname={item.date.name}
-          onClick={this.chooseDate}
-        >
-          {months[item.date.month]} {item.date.day} {item.date.year}{" "}
-          <FeatherIcon icon="arrow-right" />
-        </button>{" "}
-        {item.name}
-      </div>
-    ));
-    return (
-      <div className="overlay-container getModal">
-        <div className="card getSearchResults">
-          <h3 className="section">Search tasks</h3>
-          <div className="section input">
-            <input
-              type="text"
-              id="searchtask"
-              placeholder="Enter atleast 4 characters"
-              onKeyDown={this.querySearch}
-            />
-            <button onClick={this.hideSearch}>Hide</button>
-          </div>
-          {listItems}
-        </div>
-      </div>
-    );
-  }
-}
