@@ -211,7 +211,7 @@ class TaskCard extends React.Component {
             placeholder="update post"
             onKeyDown={this.updateTarget}
             defaultValue={this.props.name}
-            autofocus
+            autoFocus
           />
         </div>
         <div
@@ -234,7 +234,7 @@ class TaskCard extends React.Component {
             placeholder="add a note"
             onKeyDown={this.updateTarget}
             defaultValue={this.props.task.notes}
-            autofocus
+            autoFocus
           />
         </div>
 
