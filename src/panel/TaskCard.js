@@ -2,6 +2,7 @@ import React from "react";
 import { db } from "../db/config";
 import FeatherIcon from "feather-icons-react";
 import "../style.css";
+import "./TaskCard.css";
 
 class TaskCard extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class TaskCard extends React.Component {
       docId: this.props.id,
       userId: this.props.user,
       updateTask: "",
-      addNote: ""
+      addNote: "",
+      showTaskOptions: false
     };
   }
 
@@ -107,6 +109,16 @@ class TaskCard extends React.Component {
         });
     }
   };
+  showOptions = e => {
+    this.setState({
+      showTaskOptions: this.state.showTaskOptions == false ? true : false
+    });
+    setTimeout(() => {
+      this.setState({
+        showTaskOptions: this.state.showTaskOptions == false ? true : false
+      });
+    }, 3000);
+  };
   render() {
     // console.log(this.props.user);'
     var notes = this.props.task.notes;
@@ -127,10 +139,37 @@ class TaskCard extends React.Component {
           data-user={this.props.user}
           data-key={this.props.id}
         >
-          <button className="status-indicator">
-            {" "}
-            <FeatherIcon icon="check" />
-          </button>
+          <div className="card-controls">
+            {/* <button className="status-indicator">
+              {" "}
+              <FeatherIcon icon="check" />
+            </button> */}
+            <select>
+              <option value="pending">Todo</option>
+              <option>In progress</option>
+              <option value="completed">Completed</option>
+            </select>
+            <button className="task-options" onClick={this.showOptions}>
+              {" "}
+              <FeatherIcon icon="more-horizontal" />
+            </button>
+            <div
+              className={`more-controls ${
+                this.state.showTaskOptions == true ? "show" : ""
+              }`}
+            >
+              <button onClick={this.toggleEditTask}>
+                <FeatherIcon icon="edit" />
+                <span>Edit task</span>
+              </button>
+              <button onClick={this.toggleAddNotes}>
+                <FeatherIcon icon="book" /> <span>Add note</span>
+              </button>
+              <button onClick={this.requestDelete}>
+                <FeatherIcon icon="trash-2" /> <span>Delete task</span>
+              </button>
+            </div>
+          </div>
           {this.props.name}{" "}
         </div>
         <div
@@ -168,7 +207,7 @@ class TaskCard extends React.Component {
           />
         </div>
 
-        <div className="controls button-group">
+        {/* <div className="controls button-group">
           <button onClick={this.toggleEditTask}>
             <FeatherIcon icon="edit" />
             <span>Edit task</span>
@@ -179,7 +218,7 @@ class TaskCard extends React.Component {
           <button onClick={this.requestDelete}>
             <FeatherIcon icon="trash-2" /> <span>Delete task</span>
           </button>
-        </div>
+        </div> */}
       </div>
     );
   }

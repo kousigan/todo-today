@@ -1,0 +1,40 @@
+.task-options {
+  line-height: 0;
+  background: none;
+  padding: 5px;
+  margin-top: 0;
+  position: relative;
+}
+.more-controls {
+  display: none;
+  background: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+.more-controls button {
+  margin: 0 0 1px 0;
+  display: flex;
+  justify-content: flex-start;
+  background: none;
+}
+.more-controls button svg {
+  padding-right: 10px;
+}
+
+.more-controls.show {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 5px;
+  top: 50px;
+  z-index: 10;
+}
+.card-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  overflow: unset;
+}

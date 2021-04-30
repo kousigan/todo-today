@@ -173,7 +173,7 @@ class App extends React.Component {
         return (
           <div className="taskcolumn">
             <figure>
-              <img src={box} alt="Empty list" />
+              <img src={box} alt="Empty list" width="50%" />
               <figcaption>There are no items for the day.</figcaption>
             </figure>
           </div>
@@ -281,13 +281,19 @@ class App extends React.Component {
               />
 
               <h3>Tasks</h3>
-              <div className="task-container">
-                {this.state.loadingData
-                  ? this.loadingData()
-                  : this.makeCards(pending, "Pending")}
-                {this.state.loadingData
-                  ? ""
-                  : this.makeCards(completed, "Completed")}
+              <div className="scroll-container">
+                <div className="task-container">
+                  {this.state.loadingData
+                    ? this.loadingData()
+                    : this.makeCards(pending, "Pending")}
+                  <div className={`taskcolumn inprogress`}>
+                    <h4>In progress</h4>
+                    <div className="mytasks card-list" />
+                  </div>
+                  {this.state.loadingData
+                    ? ""
+                    : this.makeCards(completed, "Completed")}
+                </div>
               </div>
             </div>
           </div>

@@ -22,7 +22,7 @@ body .container .row .taskpanel {
   align-self: flex-start;
 }
 .wrapper {
-  padding: 0 5% 100px;
+  padding: 0 5% 0px;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -140,17 +140,21 @@ h1 button.small {
   margin: 0;
 }
 .task-container {
+  display: flex;
 }
 .task-container .taskcolumn {
+  flex-grow: 1;
+  width: 33.33%;
 }
 .mytasks.card-list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 10px;
   padding: 10px 5px 0;
   grid-template-rows: 1fr auto;
   margin-bottom: 10px;
   break-inside: avoid;
+  min-height: 100px;
 }
 
 .mytasks .card {
@@ -237,7 +241,6 @@ h1 button.small {
   padding: 0 10px;
 }
 figure {
-  width: 300px;
   text-align: center;
   margin: 0 auto;
 }
@@ -394,6 +397,16 @@ details[open] summary {
     align-items: center;
     cursor: pointer;
   } */
+  .scroll-container {
+    overflow: auto;
+    padding-bottom: 100px;
+  }
+  .task-container {
+    flex-wrap: wrap;
+  }
+  .task-container .taskcolumn {
+    width: 100%;
+  }
 }
 
 /* search */
