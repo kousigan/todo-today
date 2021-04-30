@@ -167,13 +167,18 @@ class App extends React.Component {
         </div>
       );
     } else {
-      if (title == "Completed") {
-        return "";
+      if (title == "Completed" || title == "In progress") {
+        return (
+          <div className={`taskcolumn ${title}`}>
+            <h4>{title}</h4>
+          </div>
+        );
       } else {
         return (
-          <div className="taskcolumn">
+          <div className={`taskcolumn ${title}`}>
+            <h4>{title}</h4>
             <figure>
-              <img src={box} alt="Empty list" width="50%" />
+              <img src={box} alt="Empty list" width="150px" />
               <figcaption>There are no items for the day.</figcaption>
             </figure>
           </div>
@@ -277,7 +282,7 @@ class App extends React.Component {
                 user={user}
                 tasks={this.state.theList.length}
                 completed={completed.length}
-                pending={pending.length}
+                pending={this.state.theList.length - completed.length}
                 click={this.slideCalendar}
               />
 
@@ -286,9 +291,9 @@ class App extends React.Component {
                 <div className="task-container">
                   {this.state.loadingData
                     ? this.loadingData()
-                    : this.makeCards(pending, "Pending")}
+                    : this.makeCards(pending, "To do")}
                   {this.state.loadingData
-                    ? this.loadingData()
+                    ? ""
                     : this.makeCards(inprogress, "In progress")}
                   {this.state.loadingData
                     ? ""

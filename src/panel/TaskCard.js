@@ -114,11 +114,11 @@ class TaskCard extends React.Component {
     this.setState({
       showTaskOptions: this.state.showTaskOptions == false ? true : false
     });
-    setTimeout(() => {
-      this.setState({
-        showTaskOptions: this.state.showTaskOptions == false ? true : false
-      });
-    }, 3000);
+    // setTimeout(() => {
+    //   this.setState({
+    //     showTaskOptions: this.state.showTaskOptions == true ? false : false
+    //   });
+    // }, 3000);
   };
   handleStateChange = e => {
     console.log(e.target.value);
@@ -165,7 +165,7 @@ class TaskCard extends React.Component {
               <FeatherIcon icon="check" />
             </button> */}
             <select onChange={this.handleStateChange}>
-              <option value="nochange" selected>
+              <option value="nochange" defaultValue>
                 Choose state
               </option>
               <option value="pending">Todo</option>
@@ -177,6 +177,7 @@ class TaskCard extends React.Component {
               <FeatherIcon icon="more-horizontal" />
             </button>
             <div
+              onBlur={this.showOptions}
               className={`more-controls ${
                 this.state.showTaskOptions == true ? "show" : ""
               }`}
