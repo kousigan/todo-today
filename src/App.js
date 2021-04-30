@@ -13,6 +13,7 @@ import delivery from "./img/delivery.svg";
 import FeatherIcon from "feather-icons-react";
 import { sortBy, groupBy } from "underscore";
 import "./style.css";
+import { bg } from "./img/datauri";
 
 class App extends React.Component {
   constructor() {
