@@ -114,11 +114,11 @@ class TaskCard extends React.Component {
     this.setState({
       showTaskOptions: this.state.showTaskOptions == false ? true : false
     });
-    // setTimeout(() => {
-    //   this.setState({
-    //     showTaskOptions: this.state.showTaskOptions == true ? false : false
-    //   });
-    // }, 3000);
+    setTimeout(() => {
+      this.setState({
+        showTaskOptions: this.state.showTaskOptions == true ? false : false
+      });
+    }, 3000);
   };
   handleStateChange = e => {
     console.log(e.target.value);
