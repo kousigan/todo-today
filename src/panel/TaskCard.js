@@ -14,7 +14,8 @@ class TaskCard extends React.Component {
       userId: this.props.user,
       updateTask: "",
       addNote: "",
-      showTaskOptions: false
+      showTaskOptions: false,
+      chooseState: undefined
     };
   }
 
@@ -119,6 +120,25 @@ class TaskCard extends React.Component {
       });
     }, 3000);
   };
+  handleStateChange = e => {
+    console.log(e.target.value);
+    const { docId, userId } = this.state;
+    var taskRef = db.collection("todo-" + userId).doc(docId);
+    taskRef.get().then(snapshot => {
+      if (e.target.value == "completed") {
+        return taskRef.update({ status: true });
+      }
+      if (e.target.value == "pending") {
+        return taskRef.update({ status: false });
+      }
+      if (e.target.value == "undefined") {
+        return taskRef.update({ status: null });
+      }
+      if (e.target.value == "nochange") {
+        return;
+      }
+    });
+  };
   render() {
     // console.log(this.props.user);'
     var notes = this.props.task.notes;
@@ -144,9 +164,12 @@ class TaskCard extends React.Component {
               {" "}
               <FeatherIcon icon="check" />
             </button> */}
-            <select>
+            <select onChange={this.handleStateChange}>
+              <option value="nochange" selected>
+                Choose state
+              </option>
               <option value="pending">Todo</option>
-              <option>In progress</option>
+              <option value="undefined">In progress</option>
               <option value="completed">Completed</option>
             </select>
             <button className="task-options" onClick={this.showOptions}>

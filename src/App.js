@@ -243,6 +243,7 @@ class App extends React.Component {
     // console.log("render: ", this.state.theList);
     var completed = this.state.theList.filter(item => item.status == true);
     var pending = this.state.theList.filter(item => item.status == false);
+    var inprogress = this.state.theList.filter(item => item.status == null);
     return (
       <div className="container">
         {this.state.userLoaded ? "" : this.getUserId()}
@@ -286,10 +287,9 @@ class App extends React.Component {
                   {this.state.loadingData
                     ? this.loadingData()
                     : this.makeCards(pending, "Pending")}
-                  <div className={`taskcolumn inprogress`}>
-                    <h4>In progress</h4>
-                    <div className="mytasks card-list" />
-                  </div>
+                  {this.state.loadingData
+                    ? this.loadingData()
+                    : this.makeCards(inprogress, "In progress")}
                   {this.state.loadingData
                     ? ""
                     : this.makeCards(completed, "Completed")}

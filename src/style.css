@@ -139,6 +139,9 @@ h1 button.small {
   float: right;
   margin: 0;
 }
+.scroll-container {
+  padding-bottom: 80px;
+}
 .task-container {
   display: flex;
 }

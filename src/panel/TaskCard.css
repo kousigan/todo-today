@@ -38,3 +38,8 @@
 .card {
   overflow: unset;
 }
+select {
+  height: 34px;
+  padding: 0;
+  margin: 8px 0;
+}
