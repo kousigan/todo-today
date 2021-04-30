@@ -15,7 +15,8 @@ class TaskCard extends React.Component {
       updateTask: "",
       addNote: "",
       showTaskOptions: false,
-      chooseState: undefined
+      chooseState: undefined,
+      editMode: false
     };
   }
 
@@ -36,12 +37,14 @@ class TaskCard extends React.Component {
   };
   toggleEditTask = e => {
     this.setState({
-      showTaskUpdate: this.state.showTaskUpdate == false ? true : false
+      showTaskUpdate: this.state.showTaskUpdate == false ? true : false,
+      editMode: this.state.editMode == false ? true : false
     });
   };
   toggleAddNotes = e => {
     this.setState({
-      showAddNote: this.state.showAddNote == false ? true : false
+      showAddNote: this.state.showAddNote == false ? true : false,
+      editMode: this.state.editMode == false ? true : false
     });
   };
   updateTarget = e => {
@@ -150,7 +153,9 @@ class TaskCard extends React.Component {
     }
     return (
       <div
-        className="card mytask"
+        className={`card mytask ${
+          this.state.editMode == true ? "edit-mode" : ""
+        }`}
         onClick={this.pushUpdate}
         data-status={this.props.status}
       >
@@ -206,6 +211,7 @@ class TaskCard extends React.Component {
             placeholder="update post"
             onKeyDown={this.updateTarget}
             defaultValue={this.props.name}
+            autofocus
           />
         </div>
         <div
@@ -228,6 +234,7 @@ class TaskCard extends React.Component {
             placeholder="add a note"
             onKeyDown={this.updateTarget}
             defaultValue={this.props.task.notes}
+            autofocus
           />
         </div>
 

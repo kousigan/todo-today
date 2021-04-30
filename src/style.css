@@ -141,6 +141,7 @@ h1 button.small {
 }
 .scroll-container {
   padding-bottom: 80px;
+  position: relative;
 }
 .task-container {
   display: flex;
@@ -185,7 +186,7 @@ h1 button.small {
 }
 .mytasks .card[data-status="true"] {
   border-color: rgb(185, 229, 185);
-  background-color: rgb(185, 229, 185, 0.2);
+  /* background-color: rgb(185, 229, 185, 0.2); */
 }
 .mytasks .card[data-status="true"] .section .status-indicator {
   color: rgb(174, 214, 174);
@@ -401,13 +402,13 @@ details[open] summary {
     cursor: pointer;
   } */
   .scroll-container {
-    overflow: auto;
     padding-bottom: 100px;
   }
   .task-container {
     flex-wrap: wrap;
   }
   .task-container .taskcolumn {
+    position: relative;
     width: 100%;
   }
 }
