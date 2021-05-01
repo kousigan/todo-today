@@ -142,6 +142,10 @@ class TaskCard extends React.Component {
       }
     });
   };
+  dragStart = e => {
+    this.props.dragStart(e);
+  };
+
   render() {
     // console.log(this.props.user);'
     var notes = this.props.task.notes;
@@ -153,11 +157,13 @@ class TaskCard extends React.Component {
     }
     return (
       <div
+        onDragStart={this.dragStart}
+        draggable="true"
         className={`card mytask ${
           this.state.editMode == true ? "edit-mode" : ""
         }`}
-        onClick={this.pushUpdate}
         data-status={this.props.status}
+        id={this.props.id}
       >
         <div
           className="section section"

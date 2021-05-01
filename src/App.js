@@ -11,9 +11,9 @@ import box from "./img/box.svg";
 import logo from "./img/logo.svg";
 import delivery from "./img/delivery.svg";
 import FeatherIcon from "feather-icons-react";
-import { sortBy, groupBy } from "underscore";
+import { Draggable, Droppable } from "react-drag-and-drop";
+
 import "./style.css";
-import { bg } from "./img/datauri";
 
 class App extends React.Component {
   constructor() {
@@ -44,7 +44,8 @@ class App extends React.Component {
       showerror: false,
       slide: "slide-out",
       notificationPanel: "slide-out",
-      search: false
+      search: false,
+      currentParent: null
     };
   }
 
@@ -147,37 +148,76 @@ class App extends React.Component {
     );
   };
 
+  drop = event => {
+    let parentContainer = event.target.closest(".mytasks").id;
+
+    var data = event.dataTransfer.getData("Text");
+    event.target.closest(".mytasks").appendChild(document.getElementById(data));
+    this.handleStateChange(data, parentContainer);
+  };
+  handleStateChange = (docId, parentContainer) => {
+    var taskRef = db.collection("todo-" + this.state.user).doc(docId);
+    taskRef.get().then(snapshot => {
+      if (parentContainer == "Completed") {
+        return taskRef.update({ status: true });
+      }
+      if (parentContainer == "Todo") {
+        return taskRef.update({ status: false });
+      }
+      if (parentContainer == "Inprogress") {
+        return taskRef.update({ status: null });
+      }
+    });
+  };
+  dragStart = event => {
+    event.dataTransfer.effectAllowed = "move";
+    var data = event.dataTransfer.setData("Text", event.target.id);
+    console.log(event, "data", data);
+
+    console.log("parentnode", event.target.closest(".mytasks").id);
+    this.setState({ currentParent: event.target.parentNode.id });
+  };
+
   makeCards = (data, title) => {
     // console.log("makeCards", data);
     if (data.length > 0) {
       return (
         <div className={`taskcolumn ${title}`}>
           <h4>{title}</h4>
-          <div className="mytasks card-list">
-            {data.map(task => (
-              <TaskCard
-                key={task.id}
-                user={this.state.user}
-                id={task.id}
-                name={task.name}
-                status={task.status}
-                task={task}
-              />
-            ))}
-          </div>
+          <Droppable>
+            <div className="mytasks card-list" onDrop={this.drop} id={title}>
+              {data.map((task, i) => (
+                <TaskCard
+                  dragStart={this.dragStart}
+                  key={task.id + i}
+                  user={this.state.user}
+                  id={task.id}
+                  name={task.name}
+                  status={task.status}
+                  task={task}
+                />
+              ))}
+            </div>
+          </Droppable>
         </div>
       );
     } else {
       if (title == "Completed" || title == "In progress") {
         return (
-          <div className={`taskcolumn ${title}`}>
+          <div className={`taskcolumn ${title}`} id={title}>
             <h4>{title}</h4>
+            <Droppable>
+              <div className="mytasks card-list" />
+            </Droppable>
           </div>
         );
       } else {
         return (
-          <div className={`taskcolumn ${title}`}>
+          <div className={`taskcolumn ${title}`} id={title}>
             <h4>{title}</h4>
+            <Droppable>
+              <div className="mytasks card-list" />
+            </Droppable>
             <figure>
               <img src={box} alt="Empty list" width="150px" />
               <figcaption>There are no items for the day.</figcaption>
@@ -242,6 +282,7 @@ class App extends React.Component {
       search: true
     });
   };
+  componentWillUnmount() {}
   render() {
     const newDay_ = this.state.fdate;
 
@@ -292,10 +333,10 @@ class App extends React.Component {
                 <div className="task-container">
                   {this.state.loadingData
                     ? this.loadingData()
-                    : this.makeCards(pending, "To do")}
+                    : this.makeCards(pending, "Todo")}
                   {this.state.loadingData
                     ? ""
-                    : this.makeCards(inprogress, "In progress")}
+                    : this.makeCards(inprogress, "Inprogress")}
                   {this.state.loadingData
                     ? ""
                     : this.makeCards(completed, "Completed")}
