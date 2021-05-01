@@ -149,47 +149,59 @@ class App extends React.Component {
   };
 
   drop = event => {
-    let parentContainer = event.target.closest(".mytasks").id;
-
-    var data = event.dataTransfer.getData("Text");
-    event.target.closest(".mytasks").appendChild(document.getElementById(data));
-    this.handleStateChange(data, parentContainer);
+    console.log(event);
+    // let parentContainer = event.target.closest(".mytasks").id;
+    // console.log(parentContainer);
+    // var data = event.dataTransfer.getData("Text");
+    // event.target.closest(".mytasks").appendChild(document.getElementById(data));
+    // this.handleStateChange(data, parentContainer);
   };
   handleStateChange = (docId, parentContainer) => {
     var taskRef = db.collection("todo-" + this.state.user).doc(docId);
-    taskRef.get().then(snapshot => {
-      if (parentContainer == "Completed") {
-        return taskRef.update({ status: true });
-      }
-      if (parentContainer == "Todo") {
-        return taskRef.update({ status: false });
-      }
-      if (parentContainer == "Inprogress") {
-        return taskRef.update({ status: null });
-      }
-    });
+
+    if (parentContainer == "Completed") {
+      return taskRef.update({ status: true });
+    }
+    if (parentContainer == "Todo") {
+      return taskRef.update({ status: false });
+    }
+    if (parentContainer == "Inprogress") {
+      return taskRef.update({ status: null });
+    }
   };
   dragStart = event => {
-    event.dataTransfer.effectAllowed = "move";
+    // event.dataTransfer.effectAllowed = "move";
     var data = event.dataTransfer.setData("Text", event.target.id);
     console.log(event, "data", data);
 
     console.log("parentnode", event.target.closest(".mytasks").id);
     this.setState({ currentParent: event.target.parentNode.id });
   };
-
+  dragEnter = event => {
+    event.preventDefault();
+  };
+  dragEnd = event => {
+    event.preventDefault();
+    let parentContainer = event.target.closest(".mytasks").id;
+    console.log("dragEnd", parentContainer);
+  };
   makeCards = (data, title) => {
     // console.log("makeCards", data);
     if (data.length > 0) {
       return (
         <div className={`taskcolumn ${title}`}>
           <h4>{title}</h4>
-          <Droppable>
-            <div className="mytasks card-list" onDrop={this.drop} id={title}>
+          <Droppable onDrop={this.drop}>
+            <div
+              className="mytasks card-list"
+              onDrop={this.drop}
+              onDragEnter={this.dragEnter}
+              id={title}
+            >
               {data.map((task, i) => (
                 <TaskCard
                   dragStart={this.dragStart}
-                  key={task.id + i}
+                  key={task.id}
                   user={this.state.user}
                   id={task.id}
                   name={task.name}
@@ -202,18 +214,20 @@ class App extends React.Component {
         </div>
       );
     } else {
-      if (title == "Completed" || title == "In progress") {
+      if (title == "Completed" || title == "Inprogress") {
         return (
-          <div className={`taskcolumn ${title}`} id={title}>
+          <div className={`taskcolumn ${title}`}>
             <h4>{title}</h4>
             <Droppable>
-              <div className="mytasks card-list" />
+              <div className="mytasks card-list">
+                <div className="mytask" />
+              </div>
             </Droppable>
           </div>
         );
       } else {
         return (
-          <div className={`taskcolumn ${title}`} id={title}>
+          <div className={`taskcolumn ${title}`}>
             <h4>{title}</h4>
             <Droppable>
               <div className="mytasks card-list" />
