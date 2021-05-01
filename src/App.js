@@ -12,6 +12,7 @@ import logo from "./img/logo.svg";
 import delivery from "./img/delivery.svg";
 import FeatherIcon from "feather-icons-react";
 import { Draggable, Droppable } from "react-drag-and-drop";
+import Dnd from "./Dnd";
 
 import "./style.css";
 
@@ -149,12 +150,12 @@ class App extends React.Component {
   };
 
   drop = event => {
-    console.log(event);
-    // let parentContainer = event.target.closest(".mytasks").id;
-    // console.log(parentContainer);
-    // var data = event.dataTransfer.getData("Text");
+    // console.log(event.target.localName);
+    let parentContainer = event.target.closest(".mytasks").id;
+    let docId = event.dataTransfer.getData("Text");
+    console.log(parentContainer, docId);
     // event.target.closest(".mytasks").appendChild(document.getElementById(data));
-    // this.handleStateChange(data, parentContainer);
+    this.handleStateChange(docId, parentContainer);
   };
   handleStateChange = (docId, parentContainer) => {
     var taskRef = db.collection("todo-" + this.state.user).doc(docId);
@@ -172,34 +173,34 @@ class App extends React.Component {
   dragStart = event => {
     // event.dataTransfer.effectAllowed = "move";
     var data = event.dataTransfer.setData("Text", event.target.id);
-    console.log(event, "data", data);
+    console.log("dataId", event.target.id);
 
-    console.log("parentnode", event.target.closest(".mytasks").id);
-    this.setState({ currentParent: event.target.parentNode.id });
+    console.log("parentnode", event.target.closest(".mytask").id);
   };
-  dragEnter = event => {
-    event.preventDefault();
+  dragOver = event => {
+    // event.preventDefault();
+    console.log(event);
   };
   dragEnd = event => {
     event.preventDefault();
     let parentContainer = event.target.closest(".mytasks").id;
     console.log("dragEnd", parentContainer);
   };
+  dragEnter = event => {
+    event.target.style.border = "2px dashed green";
+  };
+
   makeCards = (data, title) => {
     // console.log("makeCards", data);
     if (data.length > 0) {
       return (
         <div className={`taskcolumn ${title}`}>
           <h4>{title}</h4>
-          <Droppable onDrop={this.drop}>
-            <div
-              className="mytasks card-list"
-              onDrop={this.drop}
-              onDragEnter={this.dragEnter}
-              id={title}
-            >
+          <Droppable>
+            <div className="mytasks card-list" onDrop={this.drop} id={title}>
               {data.map((task, i) => (
                 <TaskCard
+                  draggable="true"
                   dragStart={this.dragStart}
                   key={task.id}
                   user={this.state.user}
@@ -219,9 +220,11 @@ class App extends React.Component {
           <div className={`taskcolumn ${title}`}>
             <h4>{title}</h4>
             <Droppable>
-              <div className="mytasks card-list">
-                <div className="mytask" />
-              </div>
+              <div
+                className="mytasks card-list"
+                id={title}
+                onDrop={this.drop}
+              />
             </Droppable>
           </div>
         );
@@ -230,12 +233,13 @@ class App extends React.Component {
           <div className={`taskcolumn ${title}`}>
             <h4>{title}</h4>
             <Droppable>
-              <div className="mytasks card-list" />
+              <div className="mytasks card-list" id={title} onDrop={this.drop}>
+                <figure>
+                  <img src={box} alt="Empty list" width="150px" />
+                  <figcaption>There are no items for the day.</figcaption>
+                </figure>
+              </div>
             </Droppable>
-            <figure>
-              <img src={box} alt="Empty list" width="150px" />
-              <figcaption>There are no items for the day.</figcaption>
-            </figure>
           </div>
         );
       }
@@ -358,6 +362,7 @@ class App extends React.Component {
               </div>
             </div>
           </div>
+
           {this.state.slide == "slide-out" ? (
             ""
           ) : (
