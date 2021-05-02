@@ -114,20 +114,23 @@ class TaskCard extends React.Component {
         });
     }
   };
+  hideAll = e => {
+    this.setState({
+      chooseStateOptions: false,
+      showTaskOptions: false
+    });
+  };
   changeStateOptions = e => {
     this.setState({
-      chooseStateOptions: this.state.chooseStateOptions == false ? true : false
+      chooseStateOptions: this.state.chooseStateOptions == false ? true : false,
+      showTaskOptions: false
     });
   };
   showOptions = e => {
     this.setState({
-      showTaskOptions: this.state.showTaskOptions == false ? true : false
+      showTaskOptions: this.state.showTaskOptions == false ? true : false,
+      chooseStateOptions: false
     });
-    // setTimeout(() => {
-    //   this.setState({
-    //     showTaskOptions: this.state.showTaskOptions == true ? false : false
-    //   });
-    // }, 3000);
   };
   handleStateChange = e => {
     let temp = e.target.getAttribute("data-state");
@@ -172,7 +175,8 @@ class TaskCard extends React.Component {
         id={this.props.id}
       >
         <div
-          className="section section"
+          onClick={this.hideAll}
+          className="section"
           data-user={this.props.user}
           data-key={this.props.id}
         >
@@ -229,7 +233,7 @@ class TaskCard extends React.Component {
               </button>
             </div>
           </div>
-          {this.props.name}{" "}
+          <div onClick={this.hideAll}>{this.props.name} </div>
         </div>
         <div
           className={`section editTask ${
