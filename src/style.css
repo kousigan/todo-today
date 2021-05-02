@@ -172,20 +172,17 @@ h1 button.small {
   margin: 7px;
   /*! background: #eceeef; */
   min-height: 100px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  height: 100%;
+  display: block;
+  flex-grow: 1;
 }
 
 .mytasks .card {
   max-width: unset;
   align-self: flex-start;
-  margin: 5px;
+  margin: 5px 0;
   border-radius: 0px;
   border-width: 0 0 0 4px;
-  display: flex;
-  width: 100%;
+  box-sizing: border-box;
 }
 .mytasks .card .section {
   display: flex;
@@ -370,7 +367,7 @@ details[open] summary {
 }
 @media screen and (max-width: 1020px) {
   .mytasks.card-list {
-    height: initial;
+    flex-grow: unset;
   }
 
   body
