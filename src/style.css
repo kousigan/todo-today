@@ -164,13 +164,8 @@ h1 button.small {
   border-radius: 3px;
 }
 .mytasks.card-list {
-  /*! display: grid; */
-  /*! grid-template-columns: 1fr; */
-  /*! grid-gap: 10px; */
   padding: 10px 5px;
-  /*! grid-template-rows: 1fr auto; */
   margin: 7px;
-  /*! break-inside: avoid; */
   background: #eceeef;
   min-height: 100px;
   display: flex;
@@ -369,7 +364,6 @@ details[open] summary {
 }
 @media screen and (max-width: 1020px) {
   .mytasks.card-list {
-    grid-template-columns: 1fr;
   }
 
   body
@@ -378,7 +372,6 @@ details[open] summary {
     .monthly-calendar.slide-in
     + .taskpanel
     .mytasks.card-list {
-    grid-template-columns: 1fr;
   }
 }
 
