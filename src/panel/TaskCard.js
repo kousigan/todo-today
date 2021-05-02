@@ -15,7 +15,7 @@ class TaskCard extends React.Component {
       updateTask: "",
       addNote: "",
       showTaskOptions: false,
-      chooseState: undefined,
+      chooseStateOptions: false,
       editMode: false
     };
   }
@@ -40,6 +40,7 @@ class TaskCard extends React.Component {
       showTaskUpdate: this.state.showTaskUpdate == false ? true : false,
       editMode: this.state.editMode == false ? true : false
     });
+    this.showOptions();
   };
   toggleAddNotes = e => {
     this.setState({
@@ -113,32 +114,37 @@ class TaskCard extends React.Component {
         });
     }
   };
+  changeStateOptions = e => {
+    this.setState({
+      chooseStateOptions: this.state.chooseStateOptions == false ? true : false
+    });
+  };
   showOptions = e => {
     this.setState({
       showTaskOptions: this.state.showTaskOptions == false ? true : false
     });
-    setTimeout(() => {
-      this.setState({
-        showTaskOptions: this.state.showTaskOptions == true ? false : false
-      });
-    }, 3000);
+    // setTimeout(() => {
+    //   this.setState({
+    //     showTaskOptions: this.state.showTaskOptions == true ? false : false
+    //   });
+    // }, 3000);
   };
   handleStateChange = e => {
-    console.log(e.target.value);
+    let temp = e.target.getAttribute("data-state");
+    if (e) {
+      console.log("updating state to", temp);
+    }
     const { docId, userId } = this.state;
     var taskRef = db.collection("todo-" + userId).doc(docId);
     taskRef.get().then(snapshot => {
-      if (e.target.value == "completed") {
-        return taskRef.update({ status: true });
-      }
-      if (e.target.value == "pending") {
+      if (temp == "todo") {
         return taskRef.update({ status: false });
       }
-      if (e.target.value == "undefined") {
+      if (temp == "inprogress") {
         return taskRef.update({ status: null });
       }
-      if (e.target.value == "nochange") {
-        return;
+      if (temp == "completed") {
+        return taskRef.update({ status: true });
       }
     });
   };
@@ -175,21 +181,39 @@ class TaskCard extends React.Component {
               {" "}
               <FeatherIcon icon="check" />
             </button> */}
-            <select onChange={this.handleStateChange}>
+            {/* <select onChange={this.handleStateChange}>
               <option value="nochange" defaultValue>
                 Choose state
               </option>
               <option value="pending">Todo</option>
               <option value="undefined">In progress</option>
               <option value="completed">Completed</option>
-            </select>
+            </select> */}
+            <button className="task-options" onClick={this.changeStateOptions}>
+              {"Choose state "}
+              <FeatherIcon icon="chevron-down" />
+            </button>
+            <div
+              className={`more-controls left ${
+                this.state.chooseStateOptions == true ? "show" : ""
+              }`}
+            >
+              <button onClick={this.handleStateChange} data-state="todo">
+                Todo
+              </button>
+              <button onClick={this.handleStateChange} data-state="inprogress">
+                In progress
+              </button>
+              <button onClick={this.handleStateChange} data-state="completed">
+                Completed
+              </button>
+            </div>
             <button className="task-options" onClick={this.showOptions}>
               {" "}
               <FeatherIcon icon="more-horizontal" />
             </button>
             <div
-              onBlur={this.showOptions}
-              className={`more-controls ${
+              className={`more-controls right ${
                 this.state.showTaskOptions == true ? "show" : ""
               }`}
             >
