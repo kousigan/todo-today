@@ -181,12 +181,12 @@ h1 button.small {
   border-radius: 0px;
   border-width: 0 0 0 4px;
   box-sizing: border-box;
+  display: block;
 }
 .mytasks .card .section {
   display: flex;
   background: none;
   grid-gap: 10px;
-  height: 100%;
   color: #555b6e;
   flex-direction: column;
 }
@@ -365,7 +365,6 @@ details[open] summary {
 }
 @media screen and (max-width: 1020px) {
   .mytasks.card-list {
-    flex-grow: unset;
   }
 
   body
