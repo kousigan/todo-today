@@ -364,6 +364,7 @@ details[open] summary {
 }
 @media screen and (max-width: 1020px) {
   .mytasks.card-list {
+    height: initial;
   }
 
   body
