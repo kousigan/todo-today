@@ -194,53 +194,43 @@ class App extends React.Component {
     // console.log("makeCards", data);
     if (data.length > 0) {
       return (
-        <div className={`taskcolumn ${title}`}>
+        <Droppable className={`taskcolumn ${title}`}>
           <h4>{title}</h4>
-          <Droppable>
-            <div className="mytasks card-list" onDrop={this.drop} id={title}>
-              {data.map((task, i) => (
-                <TaskCard
-                  draggable="true"
-                  dragStart={this.dragStart}
-                  key={task.id}
-                  user={this.state.user}
-                  id={task.id}
-                  name={task.name}
-                  status={task.status}
-                  task={task}
-                />
-              ))}
-            </div>
-          </Droppable>
-        </div>
+          <div className="mytasks card-list" onDrop={this.drop} id={title}>
+            {data.map((task, i) => (
+              <TaskCard
+                draggable="true"
+                dragStart={this.dragStart}
+                key={task.id}
+                user={this.state.user}
+                id={task.id}
+                name={task.name}
+                status={task.status}
+                task={task}
+              />
+            ))}
+          </div>
+        </Droppable>
       );
     } else {
       if (title == "Completed" || title == "Inprogress") {
         return (
-          <div className={`taskcolumn ${title}`}>
+          <Droppable className={`taskcolumn ${title}`}>
             <h4>{title}</h4>
-            <Droppable>
-              <div
-                className="mytasks card-list"
-                id={title}
-                onDrop={this.drop}
-              />
-            </Droppable>
-          </div>
+            <div className="mytasks card-list" id={title} onDrop={this.drop} />
+          </Droppable>
         );
       } else {
         return (
-          <div className={`taskcolumn ${title}`}>
+          <Droppable className={`taskcolumn ${title}`}>
             <h4>{title}</h4>
-            <Droppable>
-              <div className="mytasks card-list" id={title} onDrop={this.drop}>
-                <figure>
-                  <img src={box} alt="Empty list" width="150px" />
-                  <figcaption>There are no items for the day.</figcaption>
-                </figure>
-              </div>
-            </Droppable>
-          </div>
+            <div className="mytasks card-list" id={title} onDrop={this.drop}>
+              <figure>
+                <img src={box} alt="Empty list" width="150px" />
+                <figcaption>There are no items for the day.</figcaption>
+              </figure>
+            </div>
+          </Droppable>
         );
       }
     }
