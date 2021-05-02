@@ -191,7 +191,6 @@ class App extends React.Component {
   };
 
   makeCards = (data, title) => {
-    // console.log("makeCards", data);
     if (data.length > 0) {
       return (
         <Droppable className={`taskcolumn ${title}`}>
