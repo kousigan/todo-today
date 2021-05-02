@@ -175,7 +175,6 @@ class TaskCard extends React.Component {
         id={this.props.id}
       >
         <div
-          onClick={this.hideAll}
           className="section"
           data-user={this.props.user}
           data-key={this.props.id}
@@ -245,6 +244,7 @@ class TaskCard extends React.Component {
             placeholder="update post"
             onKeyDown={this.updateTarget}
             defaultValue={this.props.name}
+            onFocus={this.hideAll}
             autoFocus
           />
         </div>
@@ -268,6 +268,7 @@ class TaskCard extends React.Component {
             placeholder="add a note"
             onKeyDown={this.updateTarget}
             defaultValue={this.props.task.notes}
+            onFocus={this.hideAll}
             autoFocus
           />
         </div>
