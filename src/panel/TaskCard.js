@@ -180,37 +180,45 @@ class TaskCard extends React.Component {
           data-key={this.props.id}
         >
           <div className="card-controls">
-            {/* <button className="status-indicator">
-              {" "}
-              <FeatherIcon icon="check" />
-            </button> */}
-            {/* <select onChange={this.handleStateChange}>
-              <option value="nochange" defaultValue>
-                Choose state
-              </option>
-              <option value="pending">Todo</option>
-              <option value="undefined">In progress</option>
-              <option value="completed">Completed</option>
-            </select> */}
-            <button className="task-options" onClick={this.changeStateOptions}>
-              {"Choose state "}
-              <FeatherIcon icon="chevron-down" />
-            </button>
-            <div
-              className={`more-controls left ${
-                this.state.chooseStateOptions == true ? "show" : ""
-              }`}
-            >
-              <button onClick={this.handleStateChange} data-state="todo">
-                Todo
+            <span>
+              <button
+                className="status-changer"
+                onClick={this.handleStateChange}
+                data-state="todo"
+              >
+                {" "}
+                <FeatherIcon
+                  icon="clipboard"
+                  onClick={this.handleStateChange}
+                  data-state="todo"
+                />
               </button>
-              <button onClick={this.handleStateChange} data-state="inprogress">
-                In progress
+              <button
+                className="status-changer"
+                onClick={this.handleStateChange}
+                data-state="inprogress"
+              >
+                {" "}
+                <FeatherIcon
+                  icon="trending-up"
+                  onClick={this.handleStateChange}
+                  data-state="inprogress"
+                />
               </button>
-              <button onClick={this.handleStateChange} data-state="completed">
-                Completed
+              <button
+                className="status-changer"
+                onClick={this.handleStateChange}
+                data-state="completed"
+              >
+                {" "}
+                <FeatherIcon
+                  icon="check"
+                  onClick={this.handleStateChange}
+                  data-state="completed"
+                />
               </button>
-            </div>
+            </span>
+
             <button className="task-options" onClick={this.showOptions}>
               {" "}
               <FeatherIcon icon="more-horizontal" />
@@ -232,7 +240,9 @@ class TaskCard extends React.Component {
               </button>
             </div>
           </div>
-          <div onClick={this.hideAll}>{this.props.name} </div>
+        </div>
+        <div className="section" onClick={this.hideAll}>
+          {this.props.name}{" "}
         </div>
         <div
           className={`section editTask ${

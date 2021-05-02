@@ -51,3 +51,19 @@ select {
   padding: 0;
   margin: 8px 0;
 }
+.status-changer {
+  border-bottom: 2px solid #fff;
+}
+#Todo .status-changer[data-state="todo"] {
+  border-bottom-color: darkslategrey;
+  color: darkslategrey;
+}
+
+#Inprogress .status-changer[data-state="inprogress"] {
+  border-bottom-color: dodgerblue;
+  color: dodgerblue;
+}
+#Completed .status-changer[data-state="completed"] {
+  border-bottom-color: green;
+  color: green;
+}

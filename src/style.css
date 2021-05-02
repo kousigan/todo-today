@@ -193,12 +193,10 @@ h1 button.small {
   color: #555b6e;
   flex-direction: column;
 }
-.mytasks .card .section .status-indicator {
-  align-self: start;
+.mytasks .card .section .status-changer {
   margin: 0;
   background: none !important;
   color: #ddd;
-  padding: 2px 0 0;
   line-height: 0;
 }
 .mytasks .card[data-status="true"] {
