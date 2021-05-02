@@ -224,10 +224,10 @@ class App extends React.Component {
           <Droppable className={`taskcolumn ${title}`}>
             <h4>{title}</h4>
             <div className="mytasks card-list" id={title} onDrop={this.drop}>
-              <figure>
+              {/* <figure>
                 <img src={box} alt="Empty list" width="150px" />
                 <figcaption>There are no items for the day.</figcaption>
-              </figure>
+              </figure> */}
             </div>
           </Droppable>
         );
