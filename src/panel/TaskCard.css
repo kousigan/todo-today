@@ -40,7 +40,7 @@
 }
 .card-controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .card {
@@ -52,18 +52,32 @@ select {
   margin: 8px 0;
 }
 .status-changer {
-  border-bottom: 2px solid #fff;
+  /* border-bottom: 2px solid #fff; */
 }
-#Todo .status-changer[data-state="todo"] {
-  border-bottom-color: darkslategrey;
+#Todo .status-changer[data-state="todo"] svg {
+  border-bottom: 2px solid darkslategrey;
   color: darkslategrey;
 }
 
-#Inprogress .status-changer[data-state="inprogress"] {
-  border-bottom-color: dodgerblue;
+#Inprogress .status-changer[data-state="inprogress"] svg {
+  border-bottom: 2px solid dodgerblue;
   color: dodgerblue;
 }
-#Completed .status-changer[data-state="completed"] {
-  border-bottom-color: green;
+#Completed .status-changer[data-state="completed"] svg {
+  border-bottom: 2px solid green;
   color: green;
+}
+.card.mytask .section:first-of-type {
+  border: none;
+}
+.state-tabs {
+  display: none;
+}
+.mytask:hover .state-tabs {
+  display: inherit;
+}
+@media screen and (max-width: 1020px) {
+  .state-tabs {
+    display: inherit;
+  }
 }

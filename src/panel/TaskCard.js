@@ -180,7 +180,7 @@ class TaskCard extends React.Component {
           data-key={this.props.id}
         >
           <div className="card-controls">
-            <span>
+            <span class="state-tabs">
               <button
                 className="status-changer"
                 onClick={this.handleStateChange}
@@ -241,7 +241,7 @@ class TaskCard extends React.Component {
             </div>
           </div>
         </div>
-        <div className="section" onClick={this.hideAll}>
+        <div className="section taskname" onClick={this.hideAll}>
           {this.props.name}{" "}
         </div>
         <div
@@ -282,19 +282,6 @@ class TaskCard extends React.Component {
             autoFocus
           />
         </div>
-
-        {/* <div className="controls button-group">
-          <button onClick={this.toggleEditTask}>
-            <FeatherIcon icon="edit" />
-            <span>Edit task</span>
-          </button>
-          <button onClick={this.toggleAddNotes}>
-            <FeatherIcon icon="book" /> <span>Add note</span>
-          </button>
-          <button onClick={this.requestDelete}>
-            <FeatherIcon icon="trash-2" /> <span>Delete task</span>
-          </button>
-        </div> */}
       </div>
     );
   }

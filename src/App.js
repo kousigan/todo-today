@@ -12,7 +12,6 @@ import logo from "./img/logo.svg";
 import delivery from "./img/delivery.svg";
 import FeatherIcon from "feather-icons-react";
 import { Draggable, Droppable } from "react-drag-and-drop";
-import Dnd from "./Dnd";
 
 import "./style.css";
 

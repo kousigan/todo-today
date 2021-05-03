@@ -45,6 +45,7 @@
   padding: 0 0 0 10px;
   color: #b1b7c9;
 }
+
 @media screen and (max-width: 1020px) {
   .date-large h1 * {
     font-size: 32px;
